@@ -10,6 +10,7 @@
     --color-titanium-white: #e0e0e0;
     --color-cold-grey: #9d9d9d;
     --color-chaos-black: #0f0f0f;
+    --color-chaos-black-50: rgba(15, 15, 15, 0.5);
     --color-bright-indigo: #6f00fd;
     --color-black-wash: #0c0c0c;
     --color-raven: #0b0b0b;
@@ -25,4 +26,12 @@
     --font-family-inter: 'Inter', sans-serif;
     --font-family-poppins: 'Poppins', sans-serif;
     --font-family-source-code: 'Source Code Pro', monospace;
+}
+
+body {
+    background-color: var(--color-black-metal);
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-poppins);
+    color: var(--color-titanium-white);
 }
