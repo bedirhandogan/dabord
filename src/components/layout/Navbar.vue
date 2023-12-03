@@ -110,6 +110,7 @@ export default {
     gap: 10px;
     align-items: center;
     cursor: pointer;
+    z-index: 1;
 }
 
 .selected-lang {
