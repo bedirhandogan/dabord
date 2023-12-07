@@ -1,5 +1,5 @@
 @import './normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&family=Source+Code+Pro:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:wght@100..900&family=Source+Code+Pro:wght@100..900&display=swap');
 
 :root {
     /* Colors */
@@ -26,7 +26,7 @@
 
     /* Fonts */
     --font-family-inter: 'Inter', sans-serif;
-    --font-family-poppins: 'Poppins', sans-serif;
+    --font-family-open-sans: 'Open Sans', sans-serif;
     --font-family-source-code: 'Source Code Pro', monospace;
 }
 
@@ -34,6 +34,6 @@ body {
     background-color: var(--color-black-metal);
     margin: 0;
     padding: 0;
-    font-family: var(--font-family-poppins);
+    font-family: var(--font-family-open-sans);
     color: var(--color-titanium-white);
 }

@@ -139,7 +139,6 @@ export default defineComponent({
     padding: 5px 7px 6px;
     display: flex;
     align-items: center;
-    font-family: var(--font-family-inter);
 }
 
 .keys {
