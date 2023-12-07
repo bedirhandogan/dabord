@@ -1,5 +1,24 @@
 <script>
+import { useLanguageStore } from '@/stores/language'
+
 export default {
+    setup() {
+        const language = useLanguageStore()
+        language.setEntity({
+            tr: {
+                en: 'İngilizce',
+                tr: 'Türkçe'
+            },
+            en: {
+                en: 'English',
+                tr: 'Turkish'
+            }
+        })
+
+        return {
+            language
+        }
+    },
     data() {
         return {
             showSelectorBox: false,
@@ -40,10 +59,24 @@ export default {
             <hr />
             <div class="language" @click="this.showSelectorBox = !this.showSelectorBox">
                 <img src="@/assets/svg/language.svg" alt="language" />
-                <div class="selected-lang">English</div>
+                <div class="selected-lang">
+                    {{ language.translate(language.data.selected) }}
+                </div>
                 <div class="selector-box" v-show="showSelectorBox">
-                    <div class="select active">English</div>
-                    <div class="select">Turkish</div>
+                    <div
+                        class="select"
+                        :class="language.data.selected === 'en' && 'active'"
+                        @click="language.setLanguage('en')"
+                    >
+                        {{ language.translate('en') }}
+                    </div>
+                    <div
+                        class="select"
+                        :class="language.data.selected === 'tr' && 'active'"
+                        @click="language.setLanguage('tr')"
+                    >
+                        {{ language.translate('tr') }}
+                    </div>
                 </div>
             </div>
         </div>
