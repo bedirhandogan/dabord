@@ -1,9 +1,10 @@
 <script>
-import Navbar from '@/components/layouts/Navbar.vue'
 import { defineComponent } from 'vue'
+import Navbar from '@/components/layout/Navbar.vue'
+import Introduction from '@/components/layout/Introduction.vue'
 
 export default defineComponent({
-    components: { Navbar }
+    components: { Introduction, Navbar }
 })
 </script>
 
@@ -15,6 +16,7 @@ export default defineComponent({
     <!--    App    -->
     <div id="app">
         <Navbar />
+        <Introduction />
     </div>
 </template>
 
@@ -26,6 +28,9 @@ export default defineComponent({
     height: 100vh;
     padding: 20px 20px 0 20px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 @media (max-width: 1024px) {
