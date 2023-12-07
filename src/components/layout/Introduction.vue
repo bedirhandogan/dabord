@@ -53,12 +53,12 @@ export default {
             // then I take one percent, multiply it by the vertical value and calculate the y coordinate.
             // ((area height - box height) * (1 / 100)) * value
             const verticalOffset =
-                (this.$refs['grid-pattern'].offsetHeight - this.$refs['box2'].offsetHeight) *
+                (this.$refs['grid-pattern'].clientHeight - this.$refs['box2'].clientHeight) *
                 (1 / 100) *
                 this.verticalValue
 
             const half =
-                (this.$refs['grid-pattern'].offsetHeight - this.$refs['box2'].offsetHeight) / 2
+                (this.$refs['grid-pattern'].clientHeight - this.$refs['box2'].clientHeight) / 2
 
             const integers = [
                 ...Array.from({ length: Math.round(half) }, (_, index) => -index + 1).reverse(),
