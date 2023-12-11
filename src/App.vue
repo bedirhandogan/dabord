@@ -40,7 +40,7 @@ export default defineComponent({
 #app {
     position: relative;
     margin: 0 auto;
-    width: 1024px;
+    width: 1240px;
     height: 100vh;
     padding: 20px 20px 0 20px;
     box-sizing: border-box;
