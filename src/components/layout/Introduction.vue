@@ -90,7 +90,7 @@ export default {
         <div class="demo">
             <div style="display: flex; flex-direction: column; gap: 25px">
                 <div class="striped-pattern">
-                    <div class="grid-pattern" ref="grid-pattern">
+                    <div class="polka-pattern" ref="grid-pattern">
                         <div class="box" />
                         <div
                             class="box"
@@ -191,7 +191,7 @@ export default {
     justify-content: center;
 }
 
-.grid-pattern {
+.polka-pattern {
     position: relative;
     width: 146px;
     height: 146px;
@@ -222,5 +222,11 @@ export default {
     background-color: var(--color-bright-indigo);
     filter: unset;
     z-index: 1;
+}
+
+@media screen and (max-width: 900px) {
+    .demo {
+        display: none;
+    }
 }
 </style>
