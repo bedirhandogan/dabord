@@ -1,24 +1,40 @@
 <script>
 import Search from '@/components/shared/Search.vue'
 import { defineComponent } from 'vue'
-import { useSearchSuggestion } from '@/stores/searchSuggestion'
+import { useLanguageStore } from '@/stores/language'
+import { useModal } from '@/stores/modal'
 
 export default defineComponent({
     components: { Search },
     setup() {
-        const search = useSearchSuggestion()
+        const language = useLanguageStore()
+        const modal = useModal()
+
+        language.setEntity({
+            tr: {
+                placeholder: 'Aramak için yazın',
+                escKey: 'kapat',
+                navigateKey: 'gezin'
+            },
+            en: {
+                placeholder: 'Type to search',
+                escKey: 'to close',
+                navigateKey: 'to navigate'
+            }
+        })
 
         return {
-            search
+            language,
+            modal
         }
     }
 })
 </script>
 
 <template>
-    <div class="search-suggestion">
+    <div class="search-suggestion" v-show="modal.data.showSearchSuggestion">
         <Search
-            placeholder="Type to search"
+            :placeholder="language.translate('placeholder')"
             :shine-line-effect="false"
             style="
                 background-color: var(--color-black-metal);
@@ -68,12 +84,12 @@ export default defineComponent({
                 <div class="item">
                     <img src="@/assets/svg/up-key.svg" alt="up-key" />
                 </div>
-                to navigate
+                {{ language.translate('navigateKey') }}
             </div>
 
-            <div class="key" @click="search.toggleShow(false)">
+            <div class="key" @click="modal.mutation('showSearchSuggestion', false)">
                 <div class="item">Esc</div>
-                to close
+                {{ language.translate('escKey') }}
             </div>
         </div>
     </div>
