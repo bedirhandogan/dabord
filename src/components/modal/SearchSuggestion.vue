@@ -2,13 +2,16 @@
 import Search from '@/components/shared/Search.vue'
 import { defineComponent } from 'vue'
 import { useLanguageStore } from '@/stores/language'
-import { useModal } from '@/stores/modal'
 
 export default defineComponent({
     components: { Search },
+    props: {
+        state: {
+            type: Function
+        }
+    },
     setup() {
         const language = useLanguageStore()
-        const modal = useModal()
 
         language.setEntity({
             tr: {
@@ -24,15 +27,14 @@ export default defineComponent({
         })
 
         return {
-            language,
-            modal
+            language
         }
     }
 })
 </script>
 
 <template>
-    <div class="search-suggestion" v-show="modal.data.showSearchSuggestion">
+    <div class="search-suggestion">
         <Search
             :placeholder="language.translate('placeholder')"
             :shine-line-effect="false"
@@ -87,7 +89,7 @@ export default defineComponent({
                 {{ language.translate('navigateKey') }}
             </div>
 
-            <div class="key" @click="modal.mutation('showSearchSuggestion', false)">
+            <div class="key" @click="this.state(false)">
                 <div class="item">Esc</div>
                 {{ language.translate('escKey') }}
             </div>

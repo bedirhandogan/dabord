@@ -1,26 +1,5 @@
-<script>
-import { useModal } from '@/stores/modal'
-
-export default {
-    setup() {
-        const modal = useModal()
-
-        return {
-            modal
-        }
-    }
-}
-</script>
-
 <template>
-    <div
-        class="modal-container"
-        v-show="
-            modal.data &&
-            typeof modal.data === 'object' &&
-            Object.values(modal.data || {}).includes(true)
-        "
-    >
+    <div class="modal-container">
         <slot />
     </div>
 </template>
