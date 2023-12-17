@@ -2,13 +2,20 @@
 import Search from '@/components/shared/Search.vue'
 import { defineComponent } from 'vue'
 import { useLanguageStore } from '@/stores/language'
-import { useSearchSuggestion } from '@/stores/searchSuggestion'
+import testers from '../testers'
+import Modal from '@/components/modal/Modal.vue'
+import SearchSuggestion from '@/components/modal/SearchSuggestion.vue'
 
 export default defineComponent({
-    components: { Search },
+    computed: {
+        testers() {
+            return testers
+        }
+    },
+    components: { SearchSuggestion, Modal, Search },
     setup() {
-        const search = useSearchSuggestion()
         const language = useLanguageStore()
+
         language.setEntity({
             tr: {
                 placeholder: 'Aramak için yazın'
@@ -19,29 +26,27 @@ export default defineComponent({
         })
 
         return {
-            language,
-            search
+            language
         }
     },
     data() {
         return {
-            isMacos: navigator.platform.toUpperCase().indexOf('MAC') >= 0
+            isMacos: navigator.platform.toUpperCase().indexOf('MAC') >= 0,
+            showSearchSuggestion: false
         }
     },
     methods: {
         toggleSearchSuggestion(event) {
-            const search = useSearchSuggestion() // to prevent reference confusion
-
             if (event.metaKey || event.ctrlKey) {
-                event.preventDefault() // to block google shortcuts
-
                 if (event.key === 'k') {
-                    search.toggleShow(true)
+                    event.preventDefault() // to block google shortcuts
+
+                    this.showSearchSuggestion = true
                     return
                 }
             }
 
-            if (event.keyCode === 27) search.toggleShow(false) // esc
+            if (event.keyCode === 27 && this.showSearchSuggestion) this.showSearchSuggestion = false
         }
     },
     mounted() {
@@ -55,13 +60,26 @@ export default defineComponent({
 <template>
     <div class="test-area">
         <Search :placeholder="language.translate('placeholder')" :shine-line-effect="true">
-            <div class="hotkey" @click="search.toggleShow(true)">
+            <div class="hotkey" @click="this.showSearchSuggestion = true">
                 <div class="key">{{ isMacos ? '⌘' : 'CTRL' }}</div>
                 +
                 <div class="key">K</div>
             </div>
         </Search>
+
+        <div class="tests">
+            <component
+                v-for="(tester, name) in testers['functions']"
+                :key="name"
+                :is="tester"
+                :title="name"
+            />
+        </div>
     </div>
+
+    <Modal v-show="this.showSearchSuggestion">
+        <SearchSuggestion :state="(state) => (this.showSearchSuggestion = state)" />
+    </Modal>
 </template>
 
 <style scoped>
@@ -102,5 +120,11 @@ export default defineComponent({
 .hotkey:hover > .key {
     background-color: var(--color-chaos-black);
     border: 1px solid var(--color-thamar-black);
+}
+
+.tests {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 }
 </style>
