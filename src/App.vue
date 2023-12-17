@@ -3,19 +3,9 @@ import { defineComponent } from 'vue'
 import Navbar from '@/components/layout/Navbar.vue'
 import Introduction from '@/components/layout/Introduction.vue'
 import TestArea from '@/components/layout/TestArea.vue'
-import ModalProvider from '@/components/modal/ModalProvider.vue'
-import SearchSuggestion from '@/components/modal/SearchSuggestion.vue'
-import { useSearchSuggestion } from '@/stores/searchSuggestion'
 
 export default defineComponent({
-    components: { SearchSuggestion, ModalProvider, TestArea, Introduction, Navbar },
-    setup() {
-        const search = useSearchSuggestion()
-
-        return {
-            search
-        }
-    }
+    components: { TestArea, Introduction, Navbar }
 })
 </script>
 
@@ -30,10 +20,6 @@ export default defineComponent({
         <Introduction />
         <TestArea />
     </div>
-
-    <ModalProvider v-show="search.data.show">
-        <SearchSuggestion v-show="search.data.show" />
-    </ModalProvider>
 </template>
 
 <style scoped>
