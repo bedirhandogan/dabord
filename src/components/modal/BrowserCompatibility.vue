@@ -72,24 +72,32 @@ export default {
                     <div class="label">
                         <template v-if="browser.version_desktop === false">
                             <img src="@/assets/svg/x-circle.svg" alt="x-circle" />
-                            <span id="no-support"> {{ language.translate('label_no') }} </span>
+                            <Tooltip value="No Support · Desktop" spacing="10px">
+                                <span id="no-support"> {{ language.translate('label_no') }} </span>
+                            </Tooltip>
                         </template>
 
                         <template v-else-if="!!browser.version_desktop">
                             <img src="@/assets/svg/tick-circle.svg" alt="tick-circle" />
-                            <span id="support"> {{ browser.version_desktop }} </span>
+                            <Tooltip value="Full Support · Desktop" spacing="10px">
+                                <span id="support"> {{ browser.version_desktop }} </span>
+                            </Tooltip>
                         </template>
                     </div>
 
                     <div class="label">
                         <template v-if="browser.version_mobile === false">
                             <img src="@/assets/svg/x-circle.svg" alt="x-circle" />
-                            <span id="no-support"> {{ language.translate('label_no') }} </span>
+                            <Tooltip value="No Support · Mobile" spacing="10px">
+                                <span id="no-support"> {{ language.translate('label_no') }} </span>
+                            </Tooltip>
                         </template>
 
-                        <template v-else-if="!!browser.version_desktop">
+                        <template v-else-if="!!browser.version_mobile">
                             <img src="@/assets/svg/tick-circle.svg" alt="tick-circle" />
-                            <span id="support"> {{ browser.version_mobile }} </span>
+                            <Tooltip value="Full Support · Mobile" spacing="10px">
+                                <span id="support"> {{ browser.version_mobile }} </span>
+                            </Tooltip>
                         </template>
                     </div>
                 </div>
@@ -188,6 +196,7 @@ export default {
     gap: 10px;
     flex: 1;
     width: max-content;
+    cursor: pointer;
 }
 
 #no-support {
