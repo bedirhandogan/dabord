@@ -38,4 +38,11 @@ const getReferenceURL = (group, property) => {
     return url
 }
 
-export { getSupportList, getReferenceURL }
+const copyCodeSnippetAndNotify = (targetObject) => {
+    targetObject.isCopied = true
+    navigator.clipboard.writeText(targetObject.code)
+
+    setTimeout(() => (targetObject.isCopied = false), 500)
+}
+
+export { getSupportList, getReferenceURL, copyCodeSnippetAndNotify }

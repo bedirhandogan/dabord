@@ -22,7 +22,7 @@ import RangeSlider from '@/components/shared/RangeSlider.vue'
 import Indicator from '@/components/shared/TestComponentStructure/Indicator.vue'
 import Modal from '@/components/modal/Modal.vue'
 import BrowserCompatibility from '@/components/modal/BrowserCompatibility.vue'
-import { getReferenceURL, getSupportList } from '@/utils'
+import { copyCodeSnippetAndNotify, getReferenceURL, getSupportList } from '@/utils'
 
 const codeSnippet = (value) => `.octagon {
     transform: rotate(abs(${value}deg));
@@ -90,14 +90,9 @@ export default defineComponent({
         }
     },
     methods: {
+        copyCodeSnippetAndNotify,
         getReferenceURL,
         getSupportList,
-        copyCodeSnippet() {
-            this.isCopied = true
-            navigator.clipboard.writeText(this.code)
-
-            setTimeout(() => (this.isCopied = false), 500)
-        },
         changePropertyValue(state) {
             const integers = [
                 ...Array.from({ length: 50 }, (_, index) => -index - 1).reverse(),
@@ -150,7 +145,7 @@ export default defineComponent({
                     <Property>
                         transform:
                         <Value
-                            >rotate ( abs(
+                            >rotate ( abs (
                             <span style="color: whitesmoke">{{ this.propertyValue }}deg</span> )
                             )</Value
                         >
@@ -193,7 +188,7 @@ export default defineComponent({
                     this.isCopied ? language.translate('tipCopied') : language.translate('tipCopy')
                 "
             >
-                <Button @click="this.copyCodeSnippet">
+                <Button @click="copyCodeSnippetAndNotify(this)">
                     <img src="@/assets/svg/copy.svg" alt="copy" />
                 </Button>
             </Tooltip>
