@@ -23,25 +23,37 @@ export default {
         }
     },
     methods: {
-        mouseDownHandler(event) {
+        clientCoordinateMatcher(event, direction, device) {
+            switch (true) {
+                case device === 'desktop' && direction === 'y':
+                    return event.clientY
+                case device === 'desktop' && direction === 'x':
+                    return event.clientX
+                case device === 'mobile' && direction === 'y':
+                    return event.touches[0].clientY
+                case device === 'mobile' && direction === 'x':
+                    return event.touches[0].clientX
+            }
+        },
+        handlePointerStart(event, device) {
             event.preventDefault()
             this.isDragging = true
 
             /* ----- Vertical ----- */
             if (this.orientation === 'vertical') {
-                this.startY = event.clientY - this.circleY
+                this.startY = this.clientCoordinateMatcher(event, 'y', device) - this.circleY
                 return
             }
 
             /* ----- Horizontal ----- */
-            this.startX = event.clientX - this.circleX
+            this.startX = this.clientCoordinateMatcher(event, 'x', device) - this.circleX
         },
-        mouseMoveHandler(event) {
+        handlePointerMove(event, device) {
             if (this.isDragging) {
                 /* ----- Vertical ----- */
                 if (this.orientation === 'vertical') {
                     this.circleY = Math.min(
-                        Math.max(0, event.clientY - this.startY),
+                        Math.max(0, this.clientCoordinateMatcher(event, 'y', device) - this.startY),
                         this.$refs['range-slider'].clientHeight
                     )
                     this.value(
@@ -52,7 +64,7 @@ export default {
 
                 /* ----- Horizontal ----- */
                 this.circleX = Math.min(
-                    Math.max(0, event.clientX - this.startX),
+                    Math.max(0, this.clientCoordinateMatcher(event, 'x', device) - this.startX),
                     this.$refs['range-slider'].clientWidth
                 )
                 this.value(
@@ -60,13 +72,16 @@ export default {
                 )
             }
         },
-        mouseUpHandler() {
+        handlePointerEnd() {
             this.isDragging = false
         }
     },
     mounted() {
-        document.addEventListener('mousemove', this.mouseMoveHandler)
-        document.addEventListener('mouseup', this.mouseUpHandler)
+        document.addEventListener('mousemove', (event) => this.handlePointerMove(event, 'desktop'))
+        document.addEventListener('mouseup', (event) => this.handlePointerEnd(event, 'desktop'))
+
+        document.addEventListener('touchmove', (event) => this.handlePointerMove(event, 'mobile'))
+        document.addEventListener('touchend', (event) => this.handlePointerEnd(event, 'mobile'))
 
         /* ----- Vertical ----- */
         if (this.orientation === 'vertical') {
@@ -79,14 +94,27 @@ export default {
         this.value(Math.round((this.circleX / this.$refs['range-slider'].clientWidth) * 100))
     },
     unmounted() {
-        document.removeEventListener('mousemove', this.mouseMoveHandler)
-        document.removeEventListener('mouseup', this.mouseUpHandler)
+        document.removeEventListener('mousemove', (event) =>
+            this.handlePointerMove(event, 'desktop')
+        )
+        document.removeEventListener('mouseup', (event) => this.handlePointerEnd(event, 'desktop'))
+
+        document.removeEventListener('touchmove', (event) =>
+            this.handlePointerMove(event, 'mobile')
+        )
+        document.removeEventListener('touchend', (event) => this.handlePointerEnd(event, 'mobile'))
     }
 }
 </script>
 
 <template>
-    <div class="range-slider" :class="orientation" @mousedown="mouseDownHandler" ref="range-slider">
+    <div
+        class="range-slider"
+        :class="orientation"
+        @mousedown="(event) => handlePointerStart(event, 'desktop')"
+        v-on:touchstart="(event) => handlePointerStart(event, 'mobile')"
+        ref="range-slider"
+    >
         <div
             class="progress"
             :style="
