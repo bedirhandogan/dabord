@@ -41,12 +41,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color-eerie-black);
+    background-color: var(--color-dreamless-sleep);
     border-radius: 2px;
 }
 
 ::-webkit-scrollbar {
     width: 5px;
-    background-color: var(--color-cursed-black);
+    background-color: var(--color-black-wash);
     border-radius: 2px;
 }
