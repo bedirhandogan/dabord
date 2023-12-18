@@ -1,5 +1,26 @@
+<script>
+export default {
+    props: {
+        state: {
+            type: Boolean
+        }
+    },
+    watch: {
+        state: function (value) {
+            switch (value) {
+                case true:
+                    document.body.style.overflow = 'hidden'
+                    break
+                case false:
+                    document.body.style.overflow = 'auto'
+                    break
+            }
+        }
+    }
+}
+</script>
 <template>
-    <div class="modal-container">
+    <div class="modal-container" v-show="this.state">
         <slot />
     </div>
 </template>

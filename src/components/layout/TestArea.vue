@@ -77,7 +77,7 @@ export default defineComponent({
         </div>
     </div>
 
-    <Modal v-show="this.showSearchSuggestion">
+    <Modal :state="this.showSearchSuggestion">
         <SearchSuggestion :state="(state) => (this.showSearchSuggestion = state)" />
     </Modal>
 </template>

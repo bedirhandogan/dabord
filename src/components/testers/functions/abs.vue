@@ -205,7 +205,7 @@ export default defineComponent({
         </CodeBlock>
     </Container>
 
-    <Modal v-show="this.showBrowserCompatibility">
+    <Modal :state="this.showBrowserCompatibility">
         <BrowserCompatibility
             :state="(state) => (this.showBrowserCompatibility = state)"
             :data="getSupportList('types', 'abs')"
