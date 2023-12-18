@@ -13,4 +13,11 @@
     border-radius: 5px;
     font-size: 12px;
 }
+
+.value#length-limit {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 40px;
+}
 </style>
