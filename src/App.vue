@@ -3,14 +3,30 @@ import { defineComponent } from 'vue'
 import Navbar from '@/components/layout/Navbar.vue'
 import Introduction from '@/components/layout/Introduction.vue'
 import TestArea from '@/components/layout/TestArea.vue'
+import Loader from '@/components/shared/Loader.vue'
 
 export default defineComponent({
-    components: { TestArea, Introduction, Navbar }
+    components: { Loader, TestArea, Introduction, Navbar },
+    data() {
+        return {
+            isLoading: true
+        }
+    },
+    mounted() {
+        document.body.style.overflow = 'hidden'
+
+        setTimeout(() => {
+            this.isLoading = false
+            document.body.style.overflow = 'auto'
+        }, 500) // for a margin of error of half a second
+    }
 })
 </script>
 
 <template>
-    <!--    background objects    -->
+    <Loader v-show="this.isLoading" />
+
+    <!--    Background Objects    -->
     <div class="grid-layer" />
     <div class="radial-layer" />
 
