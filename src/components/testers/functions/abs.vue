@@ -50,6 +50,12 @@ export default defineComponent({
         Header,
         Container
     },
+    props: {
+        title: {
+            type: String,
+            default: 'Untitled'
+        }
+    },
     setup() {
         const language = useLanguageStore()
 
@@ -109,7 +115,7 @@ export default defineComponent({
 <template>
     <Container>
         <Header>
-            <Title>Abs()</Title>
+            <Title>{{ this.title }}</Title>
             <Buttons title="">
                 <Tooltip :value="language.translate('tipCode')">
                     <Button @click="this.showCodeBlock = true">
