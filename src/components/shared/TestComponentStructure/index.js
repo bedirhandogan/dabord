@@ -12,6 +12,7 @@ import Property from '@/components/shared/TestComponentStructure/Property.vue'
 import Converted from '@/components/shared/TestComponentStructure/Converted.vue'
 import Area from '@/components/shared/TestComponentStructure/Area.vue'
 import Indicator from '@/components/shared/TestComponentStructure/Indicator.vue'
+import Value from '@/components/shared/TestComponentStructure/Value.vue'
 
 export {
     Header,
@@ -27,5 +28,6 @@ export {
     Property,
     Converted,
     Area,
-    Indicator
+    Indicator,
+    Value
 }

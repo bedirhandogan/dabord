@@ -11,15 +11,15 @@ import {
     Title,
     Container,
     Information,
-    Property
+    Property,
+    Indicator,
+    Area,
+    Converted,
+    Value
 } from '@/components/shared/TestComponentStructure'
 import Tooltip from '@/components/shared/Tooltip.vue'
 import { useLanguageStore } from '@/stores/language'
-import Value from '@/components/shared/TestComponentStructure/Value.vue'
-import Converted from '@/components/shared/TestComponentStructure/Converted.vue'
-import Area from '@/components/shared/TestComponentStructure/Area.vue'
 import RangeSlider from '@/components/shared/RangeSlider.vue'
-import Indicator from '@/components/shared/TestComponentStructure/Indicator.vue'
 import Modal from '@/components/modal/Modal.vue'
 import BrowserCompatibility from '@/components/modal/BrowserCompatibility.vue'
 import { copyCodeSnippetAndNotify, getReferenceURL, getSupportList } from '@/utils'
