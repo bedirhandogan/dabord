@@ -127,4 +127,10 @@ export default defineComponent({
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 }
+
+@media screen and (max-width: 768px) {
+    .tests {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
 </style>

@@ -24,7 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -63,5 +63,13 @@
     background-image: radial-gradient(var(--color-dreamless-sleep) 1px, transparent 1px);
     background-size: calc(var(--size) / 10) calc(var(--size) / 10);
     overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .overview-container {
+        border-right: none;
+        border-bottom: 1px solid var(--color-dreamless-sleep);
+        width: 100%;
+    }
 }
 </style>
