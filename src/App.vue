@@ -15,10 +15,18 @@ export default defineComponent({
     mounted() {
         document.body.style.overflow = 'hidden'
 
-        setTimeout(() => {
-            this.isLoading = false
-            document.body.style.overflow = 'auto'
-        }, 500) // for a margin of error of half a second
+        const stopLoader = () =>
+            setTimeout(() => {
+                this.isLoading = false
+                document.body.style.overflow = 'auto'
+            }, 500) // for a margin of error of half a second
+
+        if (process.env.NODE_ENV === 'development') {
+            stopLoader()
+            return
+        }
+
+        window.onload = stopLoader
     }
 })
 </script>
