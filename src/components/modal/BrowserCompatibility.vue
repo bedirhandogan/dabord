@@ -57,7 +57,7 @@ export default {
 
         <div class="table">
             <div class="row" style="height: 40px">
-                <div class="labels" style="position: absolute; right: 50px">
+                <div class="labels" id="additional-style">
                     <div class="label">{{ language.translate('desktop') }}</div>
                     <div class="label">{{ language.translate('mobile') }}</div>
                 </div>
@@ -66,7 +66,7 @@ export default {
             <div class="row" v-for="(browser, name) in data" :key="name">
                 <div class="browser">
                     <img :src="'/' + name + '.svg'" :alt="name" />
-                    {{ name.replace('_', ' ') }}
+                    <span>{{ name.replace('_', ' ') }}</span>
                 </div>
                 <div class="labels">
                     <div class="label">
@@ -176,6 +176,11 @@ export default {
     justify-content: flex-end;
 }
 
+.labels#additional-style {
+    position: absolute;
+    right: 50px;
+}
+
 .label {
     display: flex;
     font-size: 14px;
@@ -213,6 +218,62 @@ export default {
 @media screen and (max-width: 700px) {
     .browser-compatibility {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .row {
+        padding: 0 20px;
+    }
+
+    .labels {
+        width: 250px;
+        gap: 50px;
+    }
+
+    .labels#additional-style {
+        right: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        font-size: 15px;
+    }
+
+    .labels {
+        width: 200px;
+        gap: 20px;
+    }
+
+    .browser span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .row {
+        padding-right: 0;
+    }
+
+    .labels#additional-style {
+        right: 0;
+    }
+
+    .browser span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 30px;
+    }
+
+    .label img {
+        --size: 18px;
+        width: var(--size);
+        height: var(--size);
     }
 }
 </style>
