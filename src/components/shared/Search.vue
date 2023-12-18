@@ -21,7 +21,9 @@ export default {
                 <input type="text" :placeholder="this.placeholder" />
             </div>
 
-            <slot />
+            <div class="button-wrapper">
+                <slot />
+            </div>
         </div>
     </div>
 </template>
@@ -71,5 +73,27 @@ input[type='text'] {
 
 input[type='text']::placeholder {
     color: var(--color-titanium-white);
+}
+
+@media screen and (max-width: 768px) {
+    .button-wrapper {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .shine-line {
+        border-image: linear-gradient(
+                to right,
+                transparent,
+                transparent,
+                transparent,
+                #626262,
+                transparent,
+                transparent,
+                transparent
+            )
+            30 / 1px;
+    }
 }
 </style>
