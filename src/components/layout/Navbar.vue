@@ -7,11 +7,13 @@ export default {
         language.setEntity({
             tr: {
                 en: 'İngilizce',
-                tr: 'Türkçe'
+                tr: 'Türkçe',
+                donate: 'Bağış Yap'
             },
             en: {
                 en: 'English',
-                tr: 'Turkish'
+                tr: 'Turkish',
+                donate: 'Donate'
             }
         })
 
@@ -53,7 +55,7 @@ export default {
                 </a>
                 <a href="#donate">
                     <img src="@/assets/svg/donate.svg" alt="donate" />
-                    Donate
+                    {{ language.translate('donate') }}
                 </a>
             </div>
             <hr />
