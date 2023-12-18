@@ -136,6 +136,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 30px 0;
 }
 
 .paragraph {
@@ -227,6 +228,16 @@ export default {
 @media screen and (max-width: 900px) {
     .demo {
         display: none;
+    }
+
+    .paragraph {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .paragraph {
+        font-size: 25px;
     }
 }
 </style>
