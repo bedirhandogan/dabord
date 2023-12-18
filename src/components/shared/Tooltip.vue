@@ -3,6 +3,10 @@ export default {
     props: {
         value: {
             type: String
+        },
+        spacing: {
+            type: String,
+            default: '5px'
         }
     }
 }
@@ -11,7 +15,7 @@ export default {
 <template>
     <div class="tooltip">
         <slot />
-        <div class="text">{{ this.value }}</div>
+        <div class="text" :style="{ '--top': this.spacing }">{{ this.value }}</div>
     </div>
 </template>
 
@@ -28,9 +32,10 @@ export default {
 }
 
 .text {
+    --top: 5px;
     display: none;
     position: absolute;
-    top: calc(100% + 5px);
+    top: calc(100% + var(--top));
     width: max-content;
     font-size: 12px;
     padding: 5px 8px 6px 8px;
