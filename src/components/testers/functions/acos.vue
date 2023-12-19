@@ -88,9 +88,6 @@ export default defineComponent({
             this.propertyValue = integers[Math.round((state / 100) * (integers.length - 1))]
             this.code = codeSnippet(integers[Math.round((state / 100) * (integers.length - 1))])
         }
-    },
-    mounted() {
-        console.log()
     }
 })
 </script>
