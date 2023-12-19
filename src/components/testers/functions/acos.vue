@@ -105,6 +105,9 @@ export default defineComponent({
             this.propertyValue = integers[Math.round((state / 100) * (integers.length - 1))]
             this.code = codeSnippet(integers[Math.round((state / 100) * (integers.length - 1))])
         }
+    },
+    mounted() {
+        console.log()
     }
 })
 </script>
@@ -136,7 +139,9 @@ export default defineComponent({
                     <div
                         class="octagon"
                         :style="{
-                            transform: `rotate(acos(${this.propertyValue}))`
+                            transform: `rotate(${
+                                (Math.acos(this.propertyValue) * 180) / Math.PI
+                            }deg)`
                         }"
                     />
                 </div>
@@ -158,9 +163,11 @@ export default defineComponent({
                             this.propertyValue
                         }}</Value>
                         to
-                        <Value style="padding: 5px; color: whitesmoke" id="length-limit">{{
-                            Math.cos(this.propertyValue)
-                        }}</Value>
+                        <Value style="padding: 5px; color: whitesmoke" id="length-limit"
+                            >{{
+                                Math.round((Math.acos(this.propertyValue) * 180) / Math.PI)
+                            }}°</Value
+                        >
                     </Converted>
                     <Converted v-else-if="language.data.selected === 'tr'">
                         değer
