@@ -51,8 +51,8 @@ export default defineComponent({
     position: relative;
     margin: 0 auto;
     width: 1240px;
-    height: 100vh;
-    padding: 20px 20px 0 20px;
+    height: max-content;
+    padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
