@@ -9,7 +9,22 @@ export const useLanguageStore = defineStore('language', () => {
                 localStorage.setItem('language', 'en')
                 return 'en'
             })(),
-        entities: {}
+        entities: {
+            tr: {
+                tipCode: 'Kaynak Kodu',
+                tipBrowser: 'Tarayıcı Uyumluluğu',
+                tipCopy: 'Kopyala',
+                tipCopied: 'Kopyalandı',
+                tipClose: 'Kapat'
+            },
+            en: {
+                tipCode: 'Source Code',
+                tipBrowser: 'Browser Compatibility',
+                tipCopy: 'Copy',
+                tipCopied: 'Copied',
+                tipClose: 'Close'
+            }
+        }
     })
 
     function setEntity(state) {
