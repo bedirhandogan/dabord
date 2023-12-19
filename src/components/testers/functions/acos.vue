@@ -175,9 +175,10 @@ export default defineComponent({
                             this.propertyValue
                         }}</Value
                         >'den
-                        <Value style="padding: 5px; color: whitesmoke" id="length-limit">{{
-                            Math.cos(this.propertyValue)
-                        }}</Value
+                        <Value style="padding: 5px; color: whitesmoke" id="length-limit"
+                            >{{
+                                Math.round((Math.acos(this.propertyValue) * 180) / Math.PI)
+                            }}°</Value
                         >'e dönüştürüldü
                     </Converted>
                 </Information>
