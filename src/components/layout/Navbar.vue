@@ -101,6 +101,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     font-size: 15px;
+    z-index: 2;
 }
 
 .nav-items {
@@ -145,7 +146,6 @@ export default {
     gap: 10px;
     align-items: center;
     cursor: pointer;
-    z-index: 1;
 }
 
 .selected-lang {
