@@ -11,5 +11,6 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    flex-wrap: wrap;
 }
 </style>
