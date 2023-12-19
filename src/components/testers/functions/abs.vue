@@ -200,10 +200,4 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
 }
-.octagon {
-    background: linear-gradient(#7000ff, #cc00ff);
-    width: 80px;
-    height: 80px;
-    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-}
 </style>
