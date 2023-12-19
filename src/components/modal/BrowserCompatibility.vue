@@ -234,11 +234,11 @@ export default {
     font-size: 12px;
     gap: 10px;
     cursor: pointer;
+    transition: opacity 200ms;
 }
 
 .reference:hover {
-    text-decoration: underline;
-    text-underline-offset: 5px;
+    opacity: 0.7;
 }
 
 @media screen and (max-width: 700px) {
