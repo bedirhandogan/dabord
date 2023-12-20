@@ -1,4 +1,5 @@
 import bcd from '@mdn/browser-compat-data'
+import testers from '@/components/testers'
 
 const getSupportList = (group, property) => {
     const support = bcd.css[group][property].__compat.support
@@ -45,4 +46,12 @@ const copyCodeSnippetAndNotify = (targetObject) => {
     setTimeout(() => (targetObject.isCopied = false), 500)
 }
 
-export { getSupportList, getReferenceURL, copyCodeSnippetAndNotify }
+const flatObject = (object) => {
+    return Object.assign({}, ...Object.values(object))
+}
+
+const getObjectLength = (object) => {
+    return Object.keys(object).length
+}
+
+export { getSupportList, getReferenceURL, copyCodeSnippetAndNotify, flatObject, getObjectLength }
