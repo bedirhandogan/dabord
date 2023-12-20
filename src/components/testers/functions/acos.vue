@@ -1,22 +1,22 @@
 <script>
 import { defineComponent } from 'vue'
 import {
-    Button,
-    Buttons,
-    CodeBlock,
-    Controller,
-    Header,
-    Main,
-    Overview,
-    Title,
-    Container,
-    Information,
-    Property,
-    Indicator,
-    Area,
-    Converted,
-    Value
-} from '@/components/shared/TestComponentStructure'
+    TestButton,
+    TestButtons,
+    TestCodeBlock,
+    TestController,
+    TestHeader,
+    TestMain,
+    TestOverview,
+    TestTitle,
+    TestContainer,
+    TestInformation,
+    TestProperty,
+    TestIndicator,
+    TestArea,
+    TestConverted,
+    TestValue
+} from '@/components/shared/Test'
 import Tooltip from '@/components/shared/Tooltip.vue'
 import { useLanguageStore } from '@/stores/language'
 import RangeSlider from '@/components/shared/RangeSlider.vue'
@@ -32,23 +32,23 @@ export default defineComponent({
     components: {
         BrowserCompatibility,
         Modal,
-        Indicator,
+        TestIndicator,
         RangeSlider,
-        Area,
-        Converted,
-        Value,
-        Property,
-        Information,
+        TestArea,
+        TestConverted,
+        TestValue,
+        TestProperty,
+        TestInformation,
         Tooltip,
-        CodeBlock,
-        Controller,
-        Overview,
-        Main,
-        Buttons,
-        Button,
-        Title,
-        Header,
-        Container
+        TestCodeBlock,
+        TestController,
+        TestOverview,
+        TestMain,
+        TestButtons,
+        TestButton,
+        TestTitle,
+        TestHeader,
+        TestContainer
     },
     props: {
         title: {
@@ -93,28 +93,28 @@ export default defineComponent({
 </script>
 
 <template>
-    <Container>
-        <Header>
-            <Title>{{ this.title }}</Title>
-            <Buttons title="">
+    <TestContainer>
+        <TestHeader>
+            <TestTitle>{{ this.title }}</TestTitle>
+            <TestButtons title="">
                 <Tooltip :value="language.translate('tipCode')">
-                    <Button @click="this.showCodeBlock = true">
+                    <TestButton @click="this.showCodeBlock = true">
                         <img src="@/assets/svg/code.svg" alt="code" />
-                    </Button>
+                    </TestButton>
                 </Tooltip>
                 <Tooltip
                     :value="language.translate('tipBrowser')"
                     @click="this.showBrowserCompatibility = true"
                 >
-                    <Button>
+                    <TestButton>
                         <img src="@/assets/svg/information.svg" alt="support" />
-                    </Button>
+                    </TestButton>
                 </Tooltip>
-            </Buttons>
-        </Header>
+            </TestButtons>
+        </TestHeader>
 
-        <Main>
-            <Overview>
+        <TestMain>
+            <TestOverview>
                 <div class="overview-child-wrapper">
                     <div
                         class="octagon"
@@ -125,72 +125,72 @@ export default defineComponent({
                         }"
                     />
                 </div>
-            </Overview>
-            <Controller>
-                <Information>
-                    <Title style="font-size: 16px"> Transform Property </Title>
-                    <Property>
+            </TestOverview>
+            <TestController>
+                <TestInformation>
+                    <TestTitle style="font-size: 16px"> Transform Property </TestTitle>
+                    <TestProperty>
                         transform:
-                        <Value
+                        <TestValue
                             >rotate ( acos (
                             <span style="color: whitesmoke">{{ this.propertyValue }}</span> )
-                            )</Value
+                            )</TestValue
                         >
-                    </Property>
-                    <Converted v-if="language.data.selected === 'en'">
+                    </TestProperty>
+                    <TestConverted v-if="language.data.selected === 'en'">
                         value converted from
-                        <Value style="padding: 5px; color: whitesmoke">{{
+                        <TestValue style="padding: 5px; color: whitesmoke">{{
                             this.propertyValue
-                        }}</Value>
+                        }}</TestValue>
                         to
-                        <Value style="padding: 5px; color: whitesmoke" id="length-limit"
+                        <TestValue style="padding: 5px; color: whitesmoke" id="length-limit"
                             >{{
                                 Math.round((Math.acos(this.propertyValue) * 180) / Math.PI)
-                            }}°</Value
+                            }}°</TestValue
                         >
-                    </Converted>
-                    <Converted v-else-if="language.data.selected === 'tr'">
+                    </TestConverted>
+                    <TestConverted v-else-if="language.data.selected === 'tr'">
                         değer
-                        <Value style="padding: 5px; color: whitesmoke">{{
+                        <TestValue style="padding: 5px; color: whitesmoke">{{
                             this.propertyValue
-                        }}</Value
+                        }}</TestValue
                         >'den
-                        <Value style="padding: 5px; color: whitesmoke" id="length-limit"
+                        <TestValue style="padding: 5px; color: whitesmoke" id="length-limit"
                             >{{
                                 Math.round((Math.acos(this.propertyValue) * 180) / Math.PI)
-                            }}°</Value
+                            }}°</TestValue
                         >'e dönüştürüldü
-                    </Converted>
-                </Information>
+                    </TestConverted>
+                </TestInformation>
 
-                <Area>
+                <TestArea>
                     <RangeSlider
                         default-value="25"
                         style="width: 100%"
                         :value="(state) => changePropertyValue(state)"
                     />
-                    <Indicator :value="['-', '0', '+']" style="margin-top: 10px" />
-                </Area>
-            </Controller>
-        </Main>
+                    <TestIndicator :value="['-', '0', '+']" style="margin-top: 10px" />
+                </TestArea>
+            </TestController>
+        </TestMain>
 
-        <CodeBlock :value="this.code" v-show="this.showCodeBlock">
+        <TestCodeBlock :value="this.code" v-show="this.showCodeBlock">
             <Tooltip
                 :value="
                     this.isCopied ? language.translate('tipCopied') : language.translate('tipCopy')
                 "
             >
-                <Button @click="copyCodeSnippetAndNotify(this)">
+                <TestButton @click="copyCodeSnippetAndNotify(this)">
                     <img src="@/assets/svg/copy.svg" alt="copy" />
-                </Button>
+                </TestButton>
             </Tooltip>
             <Tooltip :value="language.translate('tipClose')">
-                <Button @click="this.showCodeBlock = false">
+                <TestButton @click="this.showCodeBlock = false">
                     <img src="@/assets/svg/close.svg" alt="close" />
-                </Button>
+                </TestButton>
             </Tooltip>
-        </CodeBlock>
-    </Container>
+        </TestCodeBlock>
+    </TestContainer>
 
     <Modal :state="this.showBrowserCompatibility">
         <BrowserCompatibility
