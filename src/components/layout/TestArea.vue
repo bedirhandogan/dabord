@@ -253,7 +253,8 @@ export default defineComponent({
     transition: all 200ms;
 }
 
-.group:is(.active, :hover) {
+.group.active,
+.group:hover {
     background-color: var(--color-black-wash);
 }
 
