@@ -106,9 +106,9 @@ export default defineComponent({
 .nav-items hr {
     all: unset;
     height: 25px;
-    width: 1.5px;
+    width: 2px;
     border-radius: 2px;
-    background-color: var(--color-eerie-black);
+    background-color: var(--color-chaos-black);
 }
 
 /* ----- Links ----- */
