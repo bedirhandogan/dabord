@@ -244,9 +244,5 @@ export default defineComponent({
     .menu-toggle-icon {
         display: flex;
     }
-
-    .selector-box {
-        left: 0;
-    }
 }
 </style>
