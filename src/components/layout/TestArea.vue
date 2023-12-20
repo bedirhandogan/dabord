@@ -1,10 +1,13 @@
 <script>
 import Search from '@/components/shared/Search.vue'
-import { defineComponent } from 'vue'
+import { defineComponent, markRaw, shallowRef } from 'vue'
 import { useLanguageStore } from '@/stores/language'
 import testers from '../testers'
 import Modal from '@/components/modal/Modal.vue'
 import SearchSuggestion from '@/components/modal/SearchSuggestion.vue'
+import Pagination from '@/components/shared/Pagination.vue'
+import Dropdown from '@/components/shared/Dropdown.vue'
+import { flatObject, getObjectLength } from '@/utils'
 
 export default defineComponent({
     computed: {
@@ -12,16 +15,24 @@ export default defineComponent({
             return testers
         }
     },
-    components: { SearchSuggestion, Modal, Search },
+    components: { Dropdown, Pagination, SearchSuggestion, Modal, Search },
     setup() {
         const language = useLanguageStore()
 
         language.setEntity({
             tr: {
-                placeholder: 'Aramak için yazın'
+                placeholder: 'Aramak için yazın',
+                all: 'Tümü',
+                functions: 'Fonksiyonlar',
+                properties: 'Özellikler',
+                selectors: 'Seçiciler'
             },
             en: {
-                placeholder: 'Type to search'
+                placeholder: 'Type to search',
+                all: 'All',
+                functions: 'Functions',
+                properties: 'Properties',
+                selectors: 'Selectors'
             }
         })
 
@@ -32,10 +43,27 @@ export default defineComponent({
     data() {
         return {
             isMacos: navigator.platform.toUpperCase().indexOf('MAC') >= 0,
-            showSearchSuggestion: false
+            showSearchSuggestion: false,
+            tests: markRaw(flatObject(testers)),
+            selectedGroup: 'all',
+            activePage: 1,
+            totalPage: Math.ceil(getObjectLength(flatObject(testers)) / 4)
+        }
+    },
+    watch: {
+        selectedGroup: function (state) {
+            if (state === 'all') {
+                this.tests = markRaw(flatObject(testers))
+                this.totalPage = Math.ceil(getObjectLength(flatObject(testers)) / 4)
+                return
+            }
+
+            this.tests = markRaw(testers[state])
+            this.totalPage = Math.ceil(getObjectLength(this.tests) / 4)
         }
     },
     methods: {
+        shallowRef,
         toggleSearchSuggestion(event) {
             if (event.metaKey || event.ctrlKey) {
                 if (event.key === 'k') {
@@ -47,6 +75,12 @@ export default defineComponent({
             }
 
             if (event.keyCode === 27 && this.showSearchSuggestion) this.showSearchSuggestion = false
+        },
+        previousPage() {
+            this.activePage -= 1
+        },
+        nextPage() {
+            this.activePage = Math.min(this.activePage + 1, this.totalPage)
         }
     },
     mounted() {
@@ -67,13 +101,67 @@ export default defineComponent({
             </div>
         </Search>
 
-        <div class="tests">
-            <component
-                v-for="(tester, name) in testers['functions']"
-                :key="name"
-                :is="tester"
-                :title="name"
-            />
+        <div class="main">
+            <div class="header">
+                {{ language.translate(this.selectedGroup) }}
+                <div class="dropdown-wrapper">
+                    <Dropdown
+                        :mutation="(state) => (this.selectedGroup = state)"
+                        :state="language.translate(this.selectedGroup)"
+                        :data="['all', ...Object.keys(testers)]"
+                    >
+                        <template v-slot:selected>
+                            {{ language.translate(this.selectedGroup) }}
+                        </template>
+                    </Dropdown>
+                </div>
+                <div class="groups">
+                    <div
+                        v-for="name in ['all', ...Object.keys(testers).flatMap((key) => key)]"
+                        class="group"
+                        :class="this.selectedGroup === name ? 'active' : ''"
+                        @click="
+                            () => {
+                                this.selectedGroup = name
+                                this.activePage = 1
+                            }
+                        "
+                    >
+                        {{ language.translate(name) }}
+                    </div>
+                </div>
+            </div>
+            <div class="tests">
+                <component
+                    v-for="name in Object.keys(tests).slice(
+                        this.activePage * 4 - 4,
+                        this.activePage * 4
+                    )"
+                    :is="tests[name]"
+                    :key="name"
+                    :title="name"
+                />
+            </div>
+            <div class="pagination-wrapper">
+                <div id="vertical">
+                    <Pagination
+                        :previous="this.previousPage"
+                        :next="this.nextPage"
+                        :activePage="this.activePage"
+                        :totalPage="this.totalPage"
+                    />
+                </div>
+
+                <div id="horizontal">
+                    <Pagination
+                        :previous="this.previousPage"
+                        :next="this.nextPage"
+                        :activePage="this.activePage"
+                        :totalPage="this.totalPage"
+                        direction="horizontal"
+                    />
+                </div>
+            </div>
         </div>
     </div>
 
@@ -86,7 +174,7 @@ export default defineComponent({
 .test-area {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .hotkey {
@@ -122,10 +210,97 @@ export default defineComponent({
     border: 1px solid var(--color-thamar-black);
 }
 
+.main {
+    position: relative;
+    display: grid;
+    grid-template-columns: 100% max-content;
+    grid-template-rows: 40px max-content;
+
+    grid-gap: 10px;
+    grid-template-areas:
+        'header pagination'
+        'tests pagination';
+}
+
+.header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+
+.dropdown-wrapper {
+    display: none;
+}
+
+.groups {
+    display: flex;
+    height: max-content;
+    align-items: center;
+    background-color: var(--color-black-metal-2);
+    border: 1px solid var(--color-dreamless-sleep);
+    font-size: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+}
+
+.group {
+    padding: 10px;
+    border-right: 1px solid var(--color-dreamless-sleep);
+    transition: all 200ms;
+}
+
+.group:is(.active, :hover) {
+    background-color: var(--color-black-wash);
+}
+
+.group:last-of-type {
+    border-right: none;
+}
+
+.pagination-wrapper {
+    grid-area: pagination;
+}
+
 .tests {
+    grid-area: tests;
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+}
+
+.pagination-wrapper #horizontal {
+    display: none;
+}
+
+@media (max-width: 1440px) {
+    .main {
+        grid-template-columns: 100%;
+        grid-template-areas:
+            'header'
+            'tests'
+            'pagination';
+    }
+
+    .pagination-wrapper #horizontal {
+        display: block;
+    }
+
+    .pagination-wrapper #vertical {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .groups {
+        display: none;
+    }
+    .dropdown-wrapper {
+        display: flex;
+    }
 }
 
 @media screen and (max-width: 768px) {

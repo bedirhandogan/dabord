@@ -11,7 +11,9 @@ const testers = {
         'asin()': asin,
         'atan()': atan,
         'atan2()': atan2
-    }
+    },
+    properties: {},
+    selectors: {}
 }
 
 export default testers
