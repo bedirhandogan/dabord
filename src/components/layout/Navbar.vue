@@ -1,7 +1,10 @@
 <script>
 import { useLanguageStore } from '@/stores/language'
+import { defineComponent } from 'vue'
+import Dropdown from '@/components/shared/Dropdown.vue'
 
-export default {
+export default defineComponent({
+    components: { Dropdown },
     setup() {
         const language = useLanguageStore()
         language.setEntity({
@@ -38,7 +41,7 @@ export default {
     unmounted() {
         window.removeEventListener('click', this.hideSelectorBox)
     }
-}
+})
 </script>
 
 <template>
@@ -59,28 +62,18 @@ export default {
                 </a>
             </div>
             <hr />
-            <div class="language" @click="this.showSelectorBox = !this.showSelectorBox">
-                <img src="@/assets/svg/language.svg" alt="language" />
-                <div class="selected-lang">
-                    {{ language.translate(language.data.selected) }}
-                </div>
-                <div class="selector-box" v-show="showSelectorBox">
-                    <div
-                        class="select"
-                        :class="language.data.selected === 'en' && 'active'"
-                        @click="language.setLanguage('en')"
-                    >
-                        {{ language.translate('en') }}
+            <Dropdown
+                :mutation="(state) => language.setLanguage(state)"
+                :state="language.data.selected"
+                :data="['tr', 'en']"
+            >
+                <template v-slot:selected>
+                    <div class="selected-lang">
+                        <img src="@/assets/svg/language.svg" alt="language" />
+                        {{ language.translate(language.data.selected) }}
                     </div>
-                    <div
-                        class="select"
-                        :class="language.data.selected === 'tr' && 'active'"
-                        @click="language.setLanguage('tr')"
-                    >
-                        {{ language.translate('tr') }}
-                    </div>
-                </div>
-            </div>
+                </template>
+            </Dropdown>
         </div>
         <div
             class="menu-toggle-icon"
@@ -113,7 +106,7 @@ export default {
 .nav-items hr {
     all: unset;
     height: 25px;
-    width: 2px;
+    width: 1.5px;
     border-radius: 2px;
     background-color: var(--color-eerie-black);
 }
@@ -139,48 +132,11 @@ export default {
     color: var(--color-cold-grey);
 }
 
-/* ----- Language & Select Box ----- */
-.language {
-    position: relative;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    cursor: pointer;
-}
-
 .selected-lang {
-    transition: color 200ms;
-    user-select: none;
-}
-
-.selected-lang:hover {
-    color: var(--color-cold-grey);
-}
-
-.selector-box {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    width: max-content;
-    padding: 8px;
-    background-color: var(--color-existential-angst);
-    border: 1px solid var(--color-eerie-black);
-    border-radius: 10px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.select {
-    min-width: 100px;
-    transition: background-color 200ms;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.select:hover,
-.select.active {
-    background-color: var(--color-dreamless-sleep);
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
 }
 
 /* ----- Menu Toggle Icon ----- */
