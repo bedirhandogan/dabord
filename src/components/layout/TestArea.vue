@@ -276,6 +276,10 @@ export default defineComponent({
     display: none;
 }
 
+.pagination-wrapper #vertical {
+    margin-top: 2px;
+}
+
 @media (max-width: 1440px) {
     .main {
         grid-template-columns: 100%;

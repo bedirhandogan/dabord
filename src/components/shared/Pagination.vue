@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
 .pagination {
-    width: 40px;
+    width: 45px;
     background-color: var(--color-black-metal-2);
     border: 1px solid var(--color-dreamless-sleep);
     border-radius: 10px;
@@ -68,7 +68,7 @@ export default {
 .previous,
 .next {
     width: 100%;
-    height: 40px;
+    height: 50px;
     transition: background-color 200ms;
     cursor: pointer;
     display: flex;
@@ -105,7 +105,7 @@ export default {
 .page {
     width: 100%;
     height: max-content;
-    padding: 20px 0;
+    padding: 25px 0;
     display: flex;
     justify-content: center;
     gap: 1px;
