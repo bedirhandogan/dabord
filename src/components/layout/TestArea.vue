@@ -107,7 +107,7 @@ export default defineComponent({
                 <div class="dropdown-wrapper">
                     <Dropdown
                         :mutation="(state) => (this.selectedGroup = state)"
-                        :state="language.translate(this.selectedGroup)"
+                        :state="this.selectedGroup"
                         :data="['all', ...Object.keys(testers)]"
                     >
                         <template v-slot:selected>
