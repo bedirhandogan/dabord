@@ -1,8 +1,15 @@
 <script>
 import RangeSlider from '@/components/shared/RangeSlider.vue'
 import { useLanguageStore } from '@/stores/language'
+import testers from '@/components/testers'
+import { flatObject, getObjectLength } from '@/utils'
 
 export default {
+    computed: {
+        testers() {
+            return testers
+        }
+    },
     components: { RangeSlider },
     setup() {
         const language = useLanguageStore()
@@ -24,7 +31,8 @@ export default {
             boxCoordinate: {
                 x: 0,
                 y: 0
-            }
+            },
+            star_count: 0
         }
     },
     watch: {
@@ -68,7 +76,17 @@ export default {
 
             this.boxCoordinate.y = integers[Math.round(verticalOffset)]
         }
-    }
+    },
+    async created() {
+        const stars = await fetch(
+            'https://api.github.com/repos/bedirhandogan/dabord/stargazers'
+        ).then((res) => res.json())
+
+        if (stars.message !== 'Not Found') {
+            this.star_count = stars.length
+        }
+    },
+    methods: { flatObject, getObjectLength }
 }
 </script>
 
@@ -77,14 +95,14 @@ export default {
         <div class="information">
             <div class="star">
                 <img src="@/assets/svg/star.svg" alt="star" />
-                1.2k
+                {{ this.star_count }}
             </div>
 
             <p class="paragraph">{{ language.translate('paragraph') }}</p>
             <div class="subtext">
-                Properties <span>({{ 0 }})</span> · Pseudo-classes <span>({{ 0 }})</span> ·
-                Pseudo-elements <span>({{ 0 }})</span> · At-rules <span>({{ 0 }})</span> · Functions
-                <span>({{ 0 }})</span>
+                <div class="text" v-for="(component, name) in testers">
+                    {{ name }} <span>({{ getObjectLength(component) }})</span>
+                </div>
             </div>
         </div>
         <div class="demo">
@@ -160,13 +178,27 @@ export default {
 }
 
 .subtext {
-    font-size: 10px;
+    font-size: 12px;
     font-family: var(--font-family-inter);
     color: var(--color-more-than-a-week);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    text-transform: capitalize;
+}
+
+.text::after {
+    content: ' · ';
+}
+
+.text:last-of-type::after {
+    content: '';
 }
 
 .subtext span {
     opacity: 0.7;
+    font-family: var(--font-family-source-code);
 }
 
 /* ----- Demo ----- */
@@ -238,6 +270,10 @@ export default {
 @media screen and (max-width: 425px) {
     .paragraph {
         font-size: 25px;
+    }
+
+    .subtext {
+        font-size: 10px;
     }
 }
 </style>
