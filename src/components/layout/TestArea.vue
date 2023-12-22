@@ -142,8 +142,20 @@ export default defineComponent({
                     <div v-show="this.searchFound !== undefined">
                         {{ language.translate(this.selectedGroup) }}
                     </div>
-                    <div v-show="this.searchFound === undefined" class="not-found">
+                    <div
+                        v-show="this.searchFound === undefined"
+                        class="not-found"
+                        v-if="language.data.selected === 'en'"
+                    >
                         No results for '{{ this.searchInputValue }}'.
+                    </div>
+
+                    <div
+                        v-show="this.searchFound === undefined"
+                        class="not-found"
+                        v-else-if="language.data.selected === 'tr'"
+                    >
+                        '{{ this.searchInputValue }}' için sonuç yok.
                     </div>
                 </div>
                 <div class="dropdown-wrapper">
