@@ -298,26 +298,6 @@ export default defineComponent({
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 }
 
-.test-fade-enter {
-    animation: fade 0.5s;
-}
-
-.test-fade-leave {
-    animation: fade 0.5s reverse;
-}
-
-@keyframes fade {
-    from {
-        opacity: 1;
-        transform: translateX(-50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
 .pagination-wrapper #horizontal {
     display: none;
 }
