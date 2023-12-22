@@ -8,9 +8,13 @@ import SearchSuggestion from '@/components/modal/SearchSuggestion.vue'
 import Pagination from '@/components/shared/Pagination.vue'
 import Dropdown from '@/components/shared/Dropdown.vue'
 import { flatObject, getObjectLength } from '@/utils'
+import search from '@/components/shared/Search.vue'
 
 export default defineComponent({
     computed: {
+        search() {
+            return search
+        },
         testers() {
             return testers
         }
@@ -47,7 +51,8 @@ export default defineComponent({
             tests: markRaw(flatObject(testers)),
             selectedGroup: 'all',
             activePage: 1,
-            totalPage: Math.ceil(getObjectLength(flatObject(testers)) / 4)
+            totalPage: Math.ceil(getObjectLength(flatObject(testers)) / 4),
+            searchInputValue: ''
         }
     },
     watch: {
@@ -81,6 +86,30 @@ export default defineComponent({
         },
         nextPage() {
             this.activePage = Math.min(this.activePage + 1, this.totalPage)
+        },
+        groupSelector(name) {
+            this.selectedGroup = name
+            this.activePage = 1
+            this.searchInputValue = ''
+        },
+        filteredTest(event) {
+            this.searchInputValue = event.target.value.toLowerCase()
+
+            const sortedTests = Object.keys(this.tests).sort((value) => {
+                if (value.includes(this.searchInputValue)) return -1
+            })
+
+            this.tests = markRaw(
+                sortedTests.reduce((acc, value) => {
+                    acc[value] = this.tests[value]
+                    return acc
+                }, {})
+            )
+
+            if (this.searchInputValue.length === 0)
+                this.tests = markRaw(
+                    this.selectedGroup === 'all' ? flatObject(testers) : testers[this.selectedGroup]
+                )
         }
     },
     mounted() {
@@ -93,7 +122,12 @@ export default defineComponent({
 </script>
 <template>
     <div class="test-area">
-        <Search :placeholder="language.translate('placeholder')" :shine-line-effect="true">
+        <Search
+            :placeholder="language.translate('placeholder')"
+            :shine-line-effect="true"
+            @input="this.filteredTest"
+            :value="this.searchInputValue"
+        >
             <div class="hotkey" @click="this.showSearchSuggestion = true">
                 <div class="key">{{ isMacos ? '⌘' : 'CTRL' }}</div>
                 +
@@ -106,7 +140,7 @@ export default defineComponent({
                 {{ language.translate(this.selectedGroup) }}
                 <div class="dropdown-wrapper">
                     <Dropdown
-                        :mutation="(state) => (this.selectedGroup = state)"
+                        :mutation="this.groupSelector"
                         :state="this.selectedGroup"
                         :data="['all', ...Object.keys(testers)]"
                     >
@@ -120,12 +154,7 @@ export default defineComponent({
                         v-for="name in ['all', ...Object.keys(testers).flatMap((key) => key)]"
                         class="group"
                         :class="this.selectedGroup === name ? 'active' : ''"
-                        @click="
-                            () => {
-                                this.selectedGroup = name
-                                this.activePage = 1
-                            }
-                        "
+                        @click="this.groupSelector(name)"
                     >
                         {{ language.translate(name) }}
                     </div>
@@ -142,7 +171,7 @@ export default defineComponent({
                     :title="name"
                 />
             </div>
-            <div class="pagination-wrapper">
+            <div class="pagination-wrapper" v-show="this.searchInputValue.length === 0">
                 <div id="vertical">
                     <Pagination
                         :previous="this.previousPage"
@@ -271,6 +300,26 @@ export default defineComponent({
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+}
+
+.test-fade-enter {
+    animation: fade 0.5s;
+}
+
+.test-fade-leave {
+    animation: fade 0.5s reverse;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .pagination-wrapper #horizontal {

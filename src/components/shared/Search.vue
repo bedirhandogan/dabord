@@ -8,6 +8,9 @@ export default {
         shineLineEffect: {
             type: Boolean,
             default: false
+        },
+        value: {
+            type: String
         }
     }
 }
@@ -18,7 +21,7 @@ export default {
         <div class="shine-line" :style="{ borderImage: !this.shineLineEffect && 'unset' }">
             <div class="input-wrapper">
                 <img src="@/assets/svg/search.svg" alt="search" />
-                <input type="text" :placeholder="this.placeholder" />
+                <input type="text" :placeholder="this.placeholder" :value="this.value" />
             </div>
 
             <div class="button-wrapper">
