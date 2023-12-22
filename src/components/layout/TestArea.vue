@@ -8,13 +8,9 @@ import SearchSuggestion from '@/components/modal/SearchSuggestion.vue'
 import Pagination from '@/components/shared/Pagination.vue'
 import Dropdown from '@/components/shared/Dropdown.vue'
 import { flatObject, getObjectLength } from '@/utils'
-import search from '@/components/shared/Search.vue'
 
 export default defineComponent({
     computed: {
-        search() {
-            return search
-        },
         testers() {
             return testers
         }
