@@ -48,7 +48,8 @@ export default defineComponent({
             selectedGroup: 'all',
             activePage: 1,
             totalPage: Math.ceil(getObjectLength(flatObject(testers)) / 4),
-            searchInputValue: ''
+            searchInputValue: '',
+            searchFound: ''
         }
     },
     watch: {
@@ -106,6 +107,10 @@ export default defineComponent({
                 this.tests = markRaw(
                     this.selectedGroup === 'all' ? flatObject(testers) : testers[this.selectedGroup]
                 )
+
+            this.searchFound = Object.keys(this.tests).find((value) =>
+                value.includes(this.searchInputValue)
+            )
         }
     },
     mounted() {
@@ -133,7 +138,14 @@ export default defineComponent({
 
         <div class="main">
             <div class="header">
-                {{ language.translate(this.selectedGroup) }}
+                <div class="title">
+                    <div v-show="this.searchFound !== undefined">
+                        {{ language.translate(this.selectedGroup) }}
+                    </div>
+                    <div v-show="this.searchFound === undefined" class="not-found">
+                        No results for '{{ this.searchInputValue }}'.
+                    </div>
+                </div>
                 <div class="dropdown-wrapper">
                     <Dropdown
                         :mutation="this.groupSelector"
@@ -252,7 +264,10 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    text-transform: capitalize;
+}
+
+.not-found {
+    color: var(--color-cold-grey);
 }
 
 .dropdown-wrapper {
