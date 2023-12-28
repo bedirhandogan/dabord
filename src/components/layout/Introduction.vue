@@ -1,8 +1,8 @@
 <script>
 import RangeSlider from '@/components/shared/RangeSlider.vue'
 import testers from '@/components/testers'
-import { flatObject, getObjectLength } from '@/utils'
 import { useI18n } from 'vue-i18n'
+import { flatObject, getObjectLength } from '@/utils/object'
 
 export default {
     computed: {

@@ -6,8 +6,8 @@ import Modal from '@/components/modal/Modal.vue'
 import SearchSuggestion from '@/components/modal/SearchSuggestion.vue'
 import Pagination from '@/components/shared/Pagination.vue'
 import Dropdown from '@/components/shared/Dropdown.vue'
-import { flatObject, getObjectLength } from '@/utils'
 import { useI18n } from 'vue-i18n'
+import { flatObject, getObjectLength } from '@/utils/object'
 
 export default defineComponent({
     computed: {

@@ -1,7 +1,6 @@
 import bcd from '@mdn/browser-compat-data'
-import testers from '@/components/testers'
 
-const getSupportList = (group, property) => {
+export const getSupportList = (group, property) => {
     const support = bcd.css[group][property].__compat.support
 
     return {
@@ -33,25 +32,13 @@ const getSupportList = (group, property) => {
     }
 }
 
-const getReferenceURL = (group, property) => {
-    const url = bcd.css[group][property].__compat.mdn_url
-
-    return url
+export const getReferenceURL = (group, property) => {
+    return bcd.css[group][property].__compat.mdn_url
 }
 
-const copyCodeSnippetAndNotify = (targetObject) => {
+export const copyCodeSnippetAndNotify = (targetObject) => {
     targetObject.isCopied = true
     navigator.clipboard.writeText(targetObject.code)
 
     setTimeout(() => (targetObject.isCopied = false), 500)
 }
-
-const flatObject = (object) => {
-    return Object.assign({}, ...Object.values(object))
-}
-
-const getObjectLength = (object) => {
-    return Object.keys(object).length
-}
-
-export { getSupportList, getReferenceURL, copyCodeSnippetAndNotify, flatObject, getObjectLength }
