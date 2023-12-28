@@ -18,11 +18,11 @@ import {
     TestValue
 } from '@/components/shared/Test'
 import Tooltip from '@/components/shared/Tooltip.vue'
-import { useLanguageStore } from '@/stores/language'
 import RangeSlider from '@/components/shared/RangeSlider.vue'
 import Modal from '@/components/modal/Modal.vue'
 import BrowserCompatibility from '@/components/modal/BrowserCompatibility.vue'
 import { copyCodeSnippetAndNotify, getReferenceURL, getSupportList } from '@/utils'
+import { useI18n } from 'vue-i18n'
 
 const codeSnippet = (y, x) => `.octagon {
     transform: rotate(atan2(${y}, ${x}));
@@ -57,10 +57,10 @@ export default defineComponent({
         }
     },
     setup() {
-        const language = useLanguageStore()
+        const i18n = useI18n()
 
         return {
-            language
+            i18n
         }
     },
     data() {
@@ -102,15 +102,12 @@ export default defineComponent({
         <TestHeader>
             <TestTitle>{{ this.title }}</TestTitle>
             <TestButtons title="">
-                <Tooltip :value="language.translate('tipCode')">
+                <Tooltip :value="$t('tip.code')">
                     <TestButton @click="this.showCodeBlock = true">
                         <img src="@/assets/svg/code.svg" alt="code" />
                     </TestButton>
                 </Tooltip>
-                <Tooltip
-                    :value="language.translate('tipBrowser')"
-                    @click="this.showBrowserCompatibility = true"
-                >
+                <Tooltip :value="$t('tip.browser')" @click="this.showBrowserCompatibility = true">
                     <TestButton>
                         <img src="@/assets/svg/information.svg" alt="support" />
                     </TestButton>
@@ -145,7 +142,7 @@ export default defineComponent({
                             ) )</TestValue
                         >
                     </TestProperty>
-                    <TestConverted v-if="language.data.selected === 'en'">
+                    <TestConverted v-if="this.$i18n.locale === 'en'">
                         value converted from
                         <TestValue style="padding: 5px; color: whitesmoke"
                             ><span style="font-family: var(--font-family-source-code)">Y:</span>
@@ -163,7 +160,7 @@ export default defineComponent({
                             }}°</TestValue
                         >
                     </TestConverted>
-                    <TestConverted v-else-if="language.data.selected === 'tr'">
+                    <TestConverted v-else-if="this.$i18n.locale === 'tr'">
                         değer
                         <TestValue style="padding: 5px; color: whitesmoke"
                             ><span style="font-family: var(--font-family-source-code)">Y:</span>
@@ -206,16 +203,12 @@ export default defineComponent({
         </TestMain>
 
         <TestCodeBlock :value="this.code" v-show="this.showCodeBlock">
-            <Tooltip
-                :value="
-                    this.isCopied ? language.translate('tipCopied') : language.translate('tipCopy')
-                "
-            >
+            <Tooltip :value="this.isCopied ? $t('tip.copied') : $t('tip.copy')">
                 <TestButton @click="copyCodeSnippetAndNotify(this)">
                     <img src="@/assets/svg/copy.svg" alt="copy" />
                 </TestButton>
             </Tooltip>
-            <Tooltip :value="language.translate('tipClose')">
+            <Tooltip :value="$t('tip.close')">
                 <TestButton @click="this.showCodeBlock = false">
                     <img src="@/assets/svg/close.svg" alt="close" />
                 </TestButton>

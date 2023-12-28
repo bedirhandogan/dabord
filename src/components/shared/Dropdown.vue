@@ -1,12 +1,12 @@
 <script>
-import { useLanguageStore } from '@/stores/language'
+import { useI18n } from 'vue-i18n'
 
 export default {
     setup() {
-        const language = useLanguageStore()
+        const i18n = useI18n()
 
         return {
-            language
+            i18n
         }
     },
     props: {
@@ -18,6 +18,9 @@ export default {
         },
         data: {
             type: [Array, Object]
+        },
+        languageGroup: {
+            type: String
         }
     },
     data() {
@@ -69,7 +72,7 @@ export default {
                     }
                 "
             >
-                {{ language.translate(item) }}
+                {{ $t(`${this.languageGroup}.${item}`) }}
             </div>
         </div>
     </div>

@@ -15,6 +15,13 @@ export default defineComponent({
     mounted() {
         document.body.style.overflow = 'hidden'
 
+        this.$i18n.locale =
+            localStorage.getItem('language') ||
+            (() => {
+                localStorage.setItem('language', 'en')
+                return 'en'
+            })()
+
         const stopLoader = () =>
             setTimeout(() => {
                 this.isLoading = false

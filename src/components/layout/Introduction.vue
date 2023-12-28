@@ -1,8 +1,8 @@
 <script>
 import RangeSlider from '@/components/shared/RangeSlider.vue'
-import { useLanguageStore } from '@/stores/language'
 import testers from '@/components/testers'
 import { flatObject, getObjectLength } from '@/utils'
+import { useI18n } from 'vue-i18n'
 
 export default {
     computed: {
@@ -12,17 +12,11 @@ export default {
     },
     components: { RangeSlider },
     setup() {
-        const language = useLanguageStore()
-        language.setEntity({
-            tr: {
-                paragraph: "CSS'i kolayca keşfedin ve önizleyin!"
-            },
-            en: {
-                paragraph: 'Effortlessly Explore and Preview CSS with Ease!'
-            }
-        })
+        const i18n = useI18n()
 
-        return { language }
+        return {
+            i18n
+        }
     },
     data() {
         return {
@@ -98,7 +92,7 @@ export default {
                 {{ this.star_count }}
             </div>
 
-            <p class="paragraph">{{ language.translate('paragraph') }}</p>
+            <p class="paragraph">{{ i18n.t('introduction.paragraph') }}</p>
             <div class="subtext">
                 <div class="text" v-for="(component, name) in testers">
                     {{ name }} <span>({{ getObjectLength(component) }})</span>

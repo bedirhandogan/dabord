@@ -1,6 +1,6 @@
 <script>
-import { useLanguageStore } from '@/stores/language'
 import Tooltip from '@/components/shared/Tooltip.vue'
+import { useI18n } from 'vue-i18n'
 
 export default {
     components: { Tooltip },
@@ -16,37 +16,10 @@ export default {
         }
     },
     setup() {
-        const language = useLanguageStore()
-
-        language.setEntity({
-            tr: {
-                title: 'Tarayıcı Uyumluluğu',
-                label_no: 'Yok',
-                reference: "MDN'den alıntılanmıştır.",
-                tipClose: 'Kapat',
-                desktop: 'Masaüstü',
-                mobile: 'Mobil',
-                tipSupportDesktop: 'Tam Destek · Masaüstü',
-                tipNoSupportDesktop: 'Destek Yok · Masaüstü',
-                tipSupportMobile: 'Tam Destek · Mobil',
-                tipNoSupportMobile: 'Destek Yok · Mobil'
-            },
-            en: {
-                title: 'Browser Compatibility',
-                label_no: 'No',
-                reference: 'Referenced from MDN.',
-                tipClose: 'Close',
-                desktop: 'Desktop',
-                mobile: 'Mobile',
-                tipSupportDesktop: 'Full Support · Desktop',
-                tipNoSupportDesktop: 'No Support · Desktop',
-                tipSupportMobile: 'Full Support · Mobile',
-                tipNoSupportMobile: 'No Support · Mobile'
-            }
-        })
+        const i18n = useI18n()
 
         return {
-            language
+            i18n
         }
     }
 }
@@ -55,8 +28,8 @@ export default {
 <template>
     <div class="browser-compatibility">
         <div class="header">
-            {{ language.translate('title') }}
-            <Tooltip :value="language.translate('tipClose')">
+            {{ $t('browser-compatibility.title') }}
+            <Tooltip :value="$t('tip.close')">
                 <div class="close" @click="this.state(false)">
                     <img src="@/assets/svg/close.svg" alt="close" />
                 </div>
@@ -66,8 +39,8 @@ export default {
         <div class="table">
             <div class="row" style="height: 40px">
                 <div class="labels" id="additional-style">
-                    <div class="label">{{ language.translate('desktop') }}</div>
-                    <div class="label">{{ language.translate('mobile') }}</div>
+                    <div class="label">{{ $t('browser-compatibility.desktop') }}</div>
+                    <div class="label">{{ $t('browser-compatibility.mobile') }}</div>
                 </div>
             </div>
 
@@ -81,17 +54,27 @@ export default {
                         <template v-if="browser.version_desktop === false">
                             <img src="@/assets/svg/x-circle.svg" alt="x-circle" />
                             <Tooltip
-                                :value="language.translate('tipNoSupportDesktop')"
+                                :value="
+                                    $t('browser-compatibility.label-no-support') +
+                                    ' · ' +
+                                    $t('browser-compatibility.desktop')
+                                "
                                 spacing="10px"
                             >
-                                <span id="no-support"> {{ language.translate('label_no') }} </span>
+                                <span id="no-support">
+                                    {{ $t('browser-compatibility.label-no') }}
+                                </span>
                             </Tooltip>
                         </template>
 
                         <template v-else-if="!!browser.version_desktop">
                             <img src="@/assets/svg/tick-circle.svg" alt="tick-circle" />
                             <Tooltip
-                                :value="language.translate('tipSupportDesktop')"
+                                :value="
+                                    $t('browser-compatibility.label-support') +
+                                    ' · ' +
+                                    $t('browser-compatibility.desktop')
+                                "
                                 spacing="10px"
                             >
                                 <span id="support"> {{ browser.version_desktop }} </span>
@@ -103,16 +86,29 @@ export default {
                         <template v-if="browser.version_mobile === false">
                             <img src="@/assets/svg/x-circle.svg" alt="x-circle" />
                             <Tooltip
-                                :value="language.translate('tipNoSupportMobile')"
+                                :value="
+                                    $t('browser-compatibility.label-no-support') +
+                                    ' · ' +
+                                    $t('browser-compatibility.mobile')
+                                "
                                 spacing="10px"
                             >
-                                <span id="no-support"> {{ language.translate('label_no') }} </span>
+                                <span id="no-support">
+                                    {{ $t('browser-compatibility.label-no') }}
+                                </span>
                             </Tooltip>
                         </template>
 
                         <template v-else-if="!!browser.version_mobile">
                             <img src="@/assets/svg/tick-circle.svg" alt="tick-circle" />
-                            <Tooltip :value="language.translate('tipSupportMobile')" spacing="10px">
+                            <Tooltip
+                                :value="
+                                    $t('browser-compatibility.label-support') +
+                                    ' · ' +
+                                    $t('browser-compatibility.mobile')
+                                "
+                                spacing="10px"
+                            >
                                 <span id="support"> {{ browser.version_mobile }} </span>
                             </Tooltip>
                         </template>
@@ -123,7 +119,7 @@ export default {
 
         <a class="reference" :href="this.reference" target="_blank">
             <img src="@/assets/svg/mdn-logo.svg" alt="mdn-logo" />
-            {{ language.translate('reference') }}
+            {{ $t('browser-compatibility.reference') }}
         </a>
     </div>
 </template>

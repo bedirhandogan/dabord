@@ -1,0 +1,86 @@
+{
+  "tr": {
+    "introduction": {
+      "paragraph": "CSS'i kolayca keşfedin ve önizleyin!"
+    },
+    "navbar": {
+      "donate": "Bağış Yap"
+    },
+    "language": {
+      "tr": "Türkçe",
+      "en": "İngilizce"
+    },
+    "search": {
+      "placeholder": "Aramak için yazın",
+      "result": "'{ searchInputValue }' için sonuç yok."
+    },
+    "css": {
+      "all": "Tümü",
+      "functions": "Fonksiyonlar",
+      "properties": "Özellikler",
+      "selectors": "Seçiciler"
+    },
+    "browser-compatibility": {
+      "title": "Tarayıcı Uyumluluğu",
+      "reference": "MDN'den alıntılanmıştır.",
+      "label-no": "Yok",
+      "label-support": "Tam Destek",
+      "label-no-support": "Destek Yok",
+      "mobile": "Mobil",
+      "desktop": "Masaüstü"
+    },
+    "tip": {
+      "close": "Kapat",
+      "code": "Kaynak Kodu",
+      "browser": "Tarayıcı Uyumluluğu",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı"
+    },
+    "navigate": {
+      "esc-key": "Kapat",
+      "down-up-key": "Gezin"
+    }
+  },
+  "en": {
+    "introduction": {
+      "paragraph": "Effortlessly Explore and Preview CSS with Ease!"
+    },
+    "navbar": {
+      "donate": "Donate"
+    },
+    "language": {
+      "tr": "Turkish",
+      "en": "English"
+    },
+    "search": {
+      "placeholder": "Type to search",
+      "result": "No results for '{ searchInputValue }'."
+    },
+    "css": {
+      "all": "All",
+      "functions": "Functions",
+      "properties": "Properties",
+      "selectors": "Selectors"
+    },
+    "browser-compatibility": {
+      "title": "Browser Compatibility",
+      "reference": "Referenced from MDN.",
+      "label-no": "No",
+      "label-support": "Full Support",
+      "label-no-support": "No Support",
+      "mobile": "Mobile",
+      "desktop": "Desktop"
+    },
+    "tip": {
+      "close": "Close",
+      "code": "Source Code",
+      "browser": "Browser Compatibility",
+      "copy": "Copy",
+      "copied": "Copied"
+    },
+    "navigate": {
+      "esc-key": "To close",
+      "down-up-key": "To navigate"
+    }
+  }
+}

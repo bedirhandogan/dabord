@@ -1,13 +1,13 @@
 <script>
 import Search from '@/components/shared/Search.vue'
 import { defineComponent, markRaw, shallowRef } from 'vue'
-import { useLanguageStore } from '@/stores/language'
 import testers from '../testers'
 import Modal from '@/components/modal/Modal.vue'
 import SearchSuggestion from '@/components/modal/SearchSuggestion.vue'
 import Pagination from '@/components/shared/Pagination.vue'
 import Dropdown from '@/components/shared/Dropdown.vue'
 import { flatObject, getObjectLength } from '@/utils'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
     computed: {
@@ -17,27 +17,10 @@ export default defineComponent({
     },
     components: { Dropdown, Pagination, SearchSuggestion, Modal, Search },
     setup() {
-        const language = useLanguageStore()
-
-        language.setEntity({
-            tr: {
-                placeholder: 'Aramak için yazın',
-                all: 'Tümü',
-                functions: 'Fonksiyonlar',
-                properties: 'Özellikler',
-                selectors: 'Seçiciler'
-            },
-            en: {
-                placeholder: 'Type to search',
-                all: 'All',
-                functions: 'Functions',
-                properties: 'Properties',
-                selectors: 'Selectors'
-            }
-        })
+        const i18n = useI18n()
 
         return {
-            language
+            i18n
         }
     },
     data() {
@@ -124,7 +107,7 @@ export default defineComponent({
 <template>
     <div class="test-area">
         <Search
-            :placeholder="language.translate('placeholder')"
+            :placeholder="$t('search.placeholder')"
             :shine-line-effect="true"
             @input="this.filteredTest"
             :value="this.searchInputValue"
@@ -140,22 +123,10 @@ export default defineComponent({
             <div class="header">
                 <div class="title">
                     <div v-show="this.searchFound !== undefined">
-                        {{ language.translate(this.selectedGroup) }}
+                        {{ $t(`css.${this.selectedGroup}`) }}
                     </div>
-                    <div
-                        v-show="this.searchFound === undefined"
-                        class="not-found"
-                        v-if="language.data.selected === 'en'"
-                    >
-                        No results for '{{ this.searchInputValue }}'.
-                    </div>
-
-                    <div
-                        v-show="this.searchFound === undefined"
-                        class="not-found"
-                        v-else-if="language.data.selected === 'tr'"
-                    >
-                        '{{ this.searchInputValue }}' için sonuç yok.
+                    <div v-show="this.searchFound === undefined" class="not-found">
+                        {{ i18n.t('search.result', { searchInputValue }) }}
                     </div>
                 </div>
                 <div class="dropdown-wrapper">
@@ -163,9 +134,10 @@ export default defineComponent({
                         :mutation="this.groupSelector"
                         :state="this.selectedGroup"
                         :data="['all', ...Object.keys(testers)]"
+                        language-group="css"
                     >
                         <template v-slot:selected>
-                            {{ language.translate(this.selectedGroup) }}
+                            {{ $t(`css.${this.selectedGroup}`) }}
                         </template>
                     </Dropdown>
                 </div>
@@ -176,7 +148,7 @@ export default defineComponent({
                         :class="this.selectedGroup === name ? 'active' : ''"
                         @click="this.groupSelector(name)"
                     >
-                        {{ language.translate(name) }}
+                        {{ $t(`css.${name}`) }}
                     </div>
                 </div>
             </div>

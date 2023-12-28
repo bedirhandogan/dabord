@@ -1,27 +1,16 @@
 <script>
-import { useLanguageStore } from '@/stores/language'
 import { defineComponent } from 'vue'
 import Dropdown from '@/components/shared/Dropdown.vue'
+import { useI18n } from 'vue-i18n'
+import changeLocalLanguage from '@/utils/language'
 
 export default defineComponent({
     components: { Dropdown },
     setup() {
-        const language = useLanguageStore()
-        language.setEntity({
-            tr: {
-                en: 'İngilizce',
-                tr: 'Türkçe',
-                donate: 'Bağış Yap'
-            },
-            en: {
-                en: 'English',
-                tr: 'Turkish',
-                donate: 'Donate'
-            }
-        })
+        const i18n = useI18n()
 
         return {
-            language
+            i18n
         }
     },
     data() {
@@ -31,6 +20,7 @@ export default defineComponent({
         }
     },
     methods: {
+        changeLocalLanguage,
         hideSelectorBox(event) {
             if (!this.$el.contains(event.target)) this.showSelectorBox = false
         }
@@ -58,19 +48,20 @@ export default defineComponent({
                 </a>
                 <a href="#donate">
                     <img src="@/assets/svg/donate.svg" alt="donate" />
-                    {{ language.translate('donate') }}
+                    {{ $t('navbar.donate') }}
                 </a>
             </div>
             <hr />
             <Dropdown
-                :mutation="(state) => language.setLanguage(state)"
-                :state="language.data.selected"
+                :mutation="(state) => changeLocalLanguage(state, this.$i18n)"
+                :state="this.$i18n.locale"
                 :data="['tr', 'en']"
+                language-group="language"
             >
                 <template v-slot:selected>
                     <div class="selected-lang">
                         <img src="@/assets/svg/language.svg" alt="language" />
-                        {{ language.translate(language.data.selected) }}
+                        {{ $t(`language.${this.$i18n.locale}`) }}
                     </div>
                 </template>
             </Dropdown>
