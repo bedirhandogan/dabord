@@ -71,6 +71,7 @@ export default defineComponent({
             this.selectedGroup = name
             this.activePage = 1
             this.searchInputValue = ''
+            this.searchFound = ''
         },
         filteredTest(event) {
             this.searchInputValue = event.target.value.toLowerCase()
