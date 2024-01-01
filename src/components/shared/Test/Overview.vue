@@ -35,6 +35,9 @@ export default {
 .indicator {
     display: grid;
     grid-gap: 20px;
+    grid-template-columns: 15px max-content 15px;
+    grid-template-rows: 15px max-content 15px;
+
     grid-template-areas:
         '.... top ....'
         'left overview right'
