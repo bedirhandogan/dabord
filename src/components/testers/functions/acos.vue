@@ -111,7 +111,8 @@ export default defineComponent({
         </TestHeader>
 
         <TestMain>
-            <TestOverview>
+            <!-- clockwise -->
+            <TestOverview :indicator="['y', 'x', '-y', '-x']">
                 <div class="overview-child-wrapper">
                     <div
                         class="octagon"
