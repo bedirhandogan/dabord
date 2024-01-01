@@ -15,9 +15,7 @@ export default {
                 {{ item }}
             </div>
 
-            <div class="overview">
-                <slot />
-            </div>
+            <slot />
         </div>
     </div>
 </template>
@@ -71,19 +69,6 @@ export default {
 
 .element:nth-of-type(4) {
     grid-area: bottom;
-}
-
-.overview {
-    --size: 150px;
-    height: var(--size);
-    width: var(--size);
-
-    outline: 1px solid var(--color-dreamless-sleep);
-
-    background-image: radial-gradient(var(--color-dreamless-sleep) 1px, transparent 1px);
-    background-size: calc(var(--size) / 10) calc(var(--size) / 10);
-    overflow: hidden;
-    grid-area: overview;
 }
 
 @media screen and (max-width: 768px) {

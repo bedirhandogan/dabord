@@ -1,3 +1,17 @@
+/* ----- Areas ----- */
+.dotted-grid-area {
+    --size: 150px;
+    height: var(--size);
+    width: var(--size);
+
+    outline: 1px solid var(--color-dreamless-sleep);
+
+    background-image: radial-gradient(var(--color-dreamless-sleep) 1px, transparent 1px);
+    background-size: calc(var(--size) / 10) calc(var(--size) / 10);
+    overflow: hidden;
+    grid-area: overview;
+}
+
 /* ----- Shapes ----- */
 .octagon {
     background: linear-gradient(#7000ff, #cc00ff);

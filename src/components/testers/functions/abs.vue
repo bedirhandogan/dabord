@@ -79,14 +79,15 @@ export default defineComponent({
         <TestMain>
             <!-- clockwise -->
             <TestOverview :indicator="['y', 'x', '-y', '-x']">
-                <div class="overview-child-wrapper">
-                    <div
-                        class="octagon"
-                        :style="{
-                            transform: `rotate(${Math.abs(this.propertyValue)}deg)`
-                        }"
-                        Test
-                    />
+                <div class="dotted-grid-area">
+                    <div class="overview-child-wrapper">
+                        <div
+                            class="octagon"
+                            :style="{
+                                transform: `rotate(${Math.abs(this.propertyValue)}deg)`
+                            }"
+                        />
+                    </div>
                 </div>
             </TestOverview>
             <TestController>
