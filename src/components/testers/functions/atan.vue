@@ -1,22 +1,5 @@
 <script>
 import { defineComponent } from 'vue'
-import {
-    TestButton,
-    TestButtons,
-    TestCodeBlock,
-    TestController,
-    TestHeader,
-    TestMain,
-    TestOverview,
-    TestTitle,
-    TestContainer,
-    TestInformation,
-    TestProperty,
-    TestIndicator,
-    TestArea,
-    TestConverted,
-    TestValue
-} from '@/components/shared/Test'
 import Tooltip from '@/components/shared/Tooltip.vue'
 import RangeSlider from '@/components/shared/RangeSlider.vue'
 import Modal from '@/components/modal/Modal.vue'
@@ -32,23 +15,8 @@ export default defineComponent({
     components: {
         BrowserCompatibility,
         Modal,
-        TestIndicator,
         RangeSlider,
-        TestArea,
-        TestConverted,
-        TestValue,
-        TestProperty,
-        TestInformation,
-        Tooltip,
-        TestCodeBlock,
-        TestController,
-        TestOverview,
-        TestMain,
-        TestButtons,
-        TestButton,
-        TestTitle,
-        TestHeader,
-        TestContainer
+        Tooltip
     },
     props: {
         title: {
