@@ -16,6 +16,7 @@ import {
     TestHeader,
     TestIndicator,
     TestInformation,
+    TestInput,
     TestMain,
     TestOverview,
     TestProperty,
@@ -48,6 +49,7 @@ app.component('TestIndicator', TestIndicator)
 app.component('TestArea', TestArea)
 app.component('TestConverted', TestConverted)
 app.component('TestValue', TestValue)
+app.component('TestInput', TestInput)
 
 app.use(i18n)
 app.use(createPinia())
