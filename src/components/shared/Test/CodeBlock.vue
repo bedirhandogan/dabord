@@ -19,17 +19,20 @@ export default {
         },
         colorizeCodeBlock() {
             const splitCode = this.value.trim().split('\n')
-            const selector = /\.(\S+)\s*{/
+            console.log()
+            const selector = /(\S+)\s*{/
             const value = /:(.*?)\s*;/
 
             /* ----- Selector Colorize ----- */
             splitCode.forEach((codeLine, index) => {
                 const matchedSelector = codeLine.match(selector)
                 if (matchedSelector) {
-                    splitCode[index] = matchedSelector.input.replace(
-                        selector,
-                        '.<span style="color: #ff3d00;">$1</span> {\n'
-                    )
+                    splitCode[index] = matchedSelector.input
+                        .slice(1, Infinity)
+                        .replace(
+                            selector,
+                            `${splitCode[0].slice(0, 1)}<span style="color: #ff3d00;">$1</span> {\n`
+                        )
                     return
                 }
 
