@@ -74,6 +74,7 @@ export default defineComponent({
             this.searchFound = ''
         },
         filteredTest(event) {
+            this.activePage = 1
             this.searchInputValue = event.target.value.toLowerCase()
 
             const sortedTests = Object.keys(this.tests).sort((value) => {
