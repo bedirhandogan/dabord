@@ -19,7 +19,7 @@ export default {
         },
         colorizeCodeBlock() {
             const splitCode = this.value.trim().split('\n')
-            const selector = /\.(\w+)\s*{/
+            const selector = /\.(\S+)\s*{/
             const value = /:(.*?)\s*;/
 
             /* ----- Selector Colorize ----- */
