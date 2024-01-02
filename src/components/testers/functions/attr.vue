@@ -7,7 +7,7 @@ import BrowserCompatibility from '@/components/modal/BrowserCompatibility.vue'
 import { copyCodeSnippetAndNotify, getReferenceURL, getSupportList } from '@/utils'
 import { useI18n } from 'vue-i18n'
 
-const codeSnippet = `.element::after {
+const codeSnippet = `p::after {
     content: attr(data-source);
 }`
 
