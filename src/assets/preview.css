@@ -1,4 +1,4 @@
-/* ----- Areas ----- */
+/* ----- Dotted Grid Area ----- */
 .dotted-grid-area {
     --size: 150px;
     height: var(--size);
@@ -10,6 +10,34 @@
     background-size: calc(var(--size) / 10) calc(var(--size) / 10);
     overflow: hidden;
     grid-area: overview;
+}
+
+/* ----- Element Content Area ----- */
+.element-content-area-container {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.element-content-area-container .element {
+    width: 100%;
+    height: 35px;
+    font-family: var(--font-family-source-code);
+    border: 1px dashed var(--color-bright-indigo);
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.element-content-area-container .content {
+    width: 100%;
+    height: 120px;
+    border: 1px dashed var(--color-eerie-black);
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 /* ----- Shapes ----- */
