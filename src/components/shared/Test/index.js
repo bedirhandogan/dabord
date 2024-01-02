@@ -13,6 +13,7 @@ import TestConverted from '@/components/shared/Test/Converted.vue'
 import TestArea from '@/components/shared/Test/Area.vue'
 import TestIndicator from '@/components/shared/Test/Indicator.vue'
 import TestValue from '@/components/shared/Test/Value.vue'
+import TestInput from '@/components/shared/Test/Input.vue'
 
 export {
     TestHeader,
@@ -29,5 +30,6 @@ export {
     TestConverted,
     TestArea,
     TestIndicator,
-    TestValue
+    TestValue,
+    TestInput
 }
