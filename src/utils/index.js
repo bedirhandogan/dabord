@@ -3,41 +3,45 @@ import bcd from '@mdn/browser-compat-data'
 export const getSupportList = (group, property) => {
     const support = bcd.css[group][property].__compat.support
 
-    const removeCharacter = (value) => {
+    const getVersion = (value) => {
         const pattern = /\d+(\.\d+)?/
 
-        if (typeof value === 'string') {
-            return parseFloat(value.match(pattern))
+        if (Array.isArray(value)) {
+            return value[0].version_added.match(pattern)[0]
         }
 
-        return value
+        if (typeof value === 'object' && typeof value.version_added === 'string') {
+            return value.version_added.match(pattern)[0]
+        }
+
+        return value.version_added
     }
 
     return {
         chrome: {
-            version_desktop: removeCharacter(support.chrome.version_added),
-            version_mobile: removeCharacter(support.chrome_android.version_added)
+            version_desktop: getVersion(support.chrome),
+            version_mobile: getVersion(support.chrome_android)
         },
         edge: {
-            version_desktop: removeCharacter(support.edge.version_added)
+            version_desktop: getVersion(support.edge)
         },
         firefox: {
-            version_desktop: removeCharacter(support.firefox.version_added),
-            version_mobile: removeCharacter(support.firefox_android.version_added)
+            version_desktop: getVersion(support.firefox),
+            version_mobile: getVersion(support.firefox_android)
         },
         opera: {
-            version_desktop: removeCharacter(support.opera.version_added),
-            version_mobile: removeCharacter(support.opera_android.version_added)
+            version_desktop: getVersion(support.opera),
+            version_mobile: getVersion(support.opera_android)
         },
         safari: {
-            version_desktop: removeCharacter(support.safari.version_added),
-            version_mobile: removeCharacter(support.safari_ios.version_added)
+            version_desktop: getVersion(support.safari),
+            version_mobile: getVersion(support.safari_ios)
         },
         samsung_internet: {
-            version_mobile: removeCharacter(support.samsunginternet_android.version_added)
+            version_mobile: getVersion(support.samsunginternet_android)
         },
         webview: {
-            version_mobile: removeCharacter(support.webview_android.version_added)
+            version_mobile: getVersion(support.webview_android)
         }
     }
 }
