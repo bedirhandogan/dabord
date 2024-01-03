@@ -8,11 +8,17 @@ export default {
     }
 }
 </script>
+
 <template>
     <div class="overview-container">
         <div class="indicator" :style="{ display: this.indicator === null ? 'block' : 'grid' }">
-            <div class="element" v-for="item in this.indicator" :key="item">
-                {{ item }}
+            <div
+                class="element"
+                v-for="(item, index) in this.indicator"
+                :key="item"
+                :class="(index === 1 || index === 3) && item.length > 2 ? 'vertical' : ''"
+            >
+                <span>{{ item }}</span>
             </div>
 
             <slot />
@@ -63,15 +69,37 @@ export default {
 }
 
 .element:nth-of-type(2) {
-    grid-area: left;
-}
-
-.element:nth-of-type(3) {
     grid-area: right;
 }
 
-.element:nth-of-type(4) {
+.element:nth-of-type(3) {
     grid-area: bottom;
+}
+
+.element:nth-of-type(2).vertical {
+    position: relative;
+}
+
+.element:nth-of-type(4).vertical {
+    position: relative;
+}
+
+.element:nth-of-type(2).vertical span {
+    position: absolute;
+    left: 8px;
+    transform-origin: 0 0;
+    transform: rotate(90deg) translate(-50%, -50%);
+}
+
+.element:nth-of-type(4) {
+    grid-area: left;
+}
+
+.element:nth-of-type(4).vertical span {
+    position: absolute;
+    left: 9px;
+    transform-origin: 0 0;
+    transform: rotate(-90deg) translate(-50%, -50%);
 }
 
 @media screen and (max-width: 768px) {
@@ -82,4 +110,3 @@ export default {
     }
 }
 </style>
-<script setup></script>
