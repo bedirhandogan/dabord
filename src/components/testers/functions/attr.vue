@@ -43,8 +43,7 @@ export default defineComponent({
     methods: {
         copyCodeSnippetAndNotify,
         getReferenceURL,
-        getSupportList,
-        changePropertyValue(state) {}
+        getSupportList
     }
 })
 </script>
