@@ -32,6 +32,12 @@
     font-size: 14px;
 }
 
+@media screen and (max-width: 425px) {
+    .element-content-area-container {
+        width: 100%;
+    }
+}
+
 .element-content-area-container .content {
     width: 100%;
     height: 120px;
