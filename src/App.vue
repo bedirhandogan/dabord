@@ -66,9 +66,15 @@ export default defineComponent({
     gap: 25px;
 }
 
-@media (max-width: 1440px) {
+@media screen and (max-width: 1440px) {
     #app {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #app {
+        padding: 0 20px 20px;
     }
 }
 
