@@ -14,6 +14,7 @@ import TestArea from '@/components/shared/Test/Area.vue'
 import TestIndicator from '@/components/shared/Test/Indicator.vue'
 import TestValue from '@/components/shared/Test/Value.vue'
 import TestInput from '@/components/shared/Test/Input.vue'
+import TestCheckbox from '@/components/shared/Test/Checkbox.vue'
 
 export {
     TestHeader,
@@ -31,5 +32,6 @@ export {
     TestArea,
     TestIndicator,
     TestValue,
-    TestInput
+    TestInput,
+    TestCheckbox
 }
