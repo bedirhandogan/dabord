@@ -25,6 +25,7 @@ export default {
     flex-direction: column;
     align-items: flex-end;
     position: relative;
+    z-index: 99;
 }
 
 .tooltip:hover .text {
