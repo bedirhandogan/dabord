@@ -9,6 +9,7 @@ import {
     TestArea,
     TestButton,
     TestButtons,
+    TestCheckbox,
     TestCodeBlock,
     TestContainer,
     TestController,
@@ -50,6 +51,7 @@ app.component('TestArea', TestArea)
 app.component('TestConverted', TestConverted)
 app.component('TestValue', TestValue)
 app.component('TestInput', TestInput)
+app.component('TestCheckbox', TestCheckbox)
 
 app.use(i18n)
 app.use(createPinia())
