@@ -166,6 +166,10 @@ export default defineComponent({
 
 /* ----- Media 768px, Mobile ----- */
 @media screen and (max-width: 768px) {
+    .navbar {
+        background-color: var(--color-black-metal);
+    }
+
     .nav-items hr {
         display: none;
     }
