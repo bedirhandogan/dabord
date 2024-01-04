@@ -25,7 +25,6 @@ export default {
     flex-direction: column;
     align-items: flex-end;
     position: relative;
-    z-index: 99;
 }
 
 .tooltip:hover .text {
@@ -44,5 +43,6 @@ export default {
     border: 1px solid var(--color-eerie-black);
     border-radius: 5px;
     user-select: none;
+    z-index: 99;
 }
 </style>
