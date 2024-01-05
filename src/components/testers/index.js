@@ -4,6 +4,7 @@ import asin from '@/components/testers/functions/asin.vue'
 import atan from '@/components/testers/functions/atan.vue'
 import atan2 from '@/components/testers/functions/atan2.vue'
 import attr from '@/components/testers/functions/attr.vue'
+import calc from '@/components/testers/functions/calc.vue'
 
 const testers = {
     functions: {
@@ -12,7 +13,8 @@ const testers = {
         'asin()': asin,
         'atan()': atan,
         'atan2()': atan2,
-        'attr()': attr
+        'attr()': attr,
+        'calc()': calc
     },
     properties: {},
     selectors: {}

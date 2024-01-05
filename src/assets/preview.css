@@ -53,3 +53,12 @@
     height: 80px;
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
 }
+
+.square {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-black-metal);
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(111, 0, 253, 0.5) 5px, rgba(111, 0, 253, 0.5) 8px);
+    outline: 2px dashed var(--color-bright-indigo);
+    outline-offset: 5px;
+}
