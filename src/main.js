@@ -21,6 +21,7 @@ import {
     TestMain,
     TestOverview,
     TestProperty,
+    TestQuantity,
     TestTitle,
     TestValue
 } from '@/components/shared/Test'
@@ -52,6 +53,7 @@ app.component('TestConverted', TestConverted)
 app.component('TestValue', TestValue)
 app.component('TestInput', TestInput)
 app.component('TestCheckbox', TestCheckbox)
+app.component('TestQuantity', TestQuantity)
 
 app.use(i18n)
 app.use(createPinia())
