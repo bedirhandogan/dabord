@@ -168,7 +168,7 @@ export default defineComponent({
                             :value="(state) => changePropertyValue(state, 'x')"
                         />
                     </div>
-                    <TestIndicator :value="['-', '0', '+']" style="margin-top: -5px" />
+                    <TestIndicator :value="['-', '0', '+']" />
                 </TestArea>
             </TestController>
         </TestMain>
@@ -209,8 +209,6 @@ export default defineComponent({
     display: flex;
     align-items: center;
     gap: 20px;
-    font-size: 13px;
-    font-family: var(--font-family-source-code);
-    color: var(--color-cold-grey);
+    font-size: 14px;
 }
 </style>
