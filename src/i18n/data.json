@@ -1,5 +1,8 @@
 {
   "tr": {
+    "no-group": {
+      "operators": "Operatörler"
+    },
     "introduction": {
       "paragraph": "CSS'i kolayca keşfedin ve önizleyin!"
     },
@@ -34,14 +37,25 @@
       "code": "Kaynak Kodu",
       "browser": "Tarayıcı Uyumluluğu",
       "copy": "Kopyala",
-      "copied": "Kopyalandı"
+      "copied": "Kopyalandı",
+      "addition": "Toplama",
+      "subtraction": "Çıkarma",
+      "multiplication": "Çarpma",
+      "division": "Bölme"
     },
     "navigate": {
       "esc-key": "Kapat",
       "down-up-key": "Gezin"
+    },
+    "preview-indicator": {
+      "width": "Genişlik",
+      "height": "Yükseklik"
     }
   },
   "en": {
+    "no-group": {
+      "operators": "Operators"
+    },
     "introduction": {
       "paragraph": "Effortlessly Explore and Preview CSS with Ease!"
     },
@@ -76,11 +90,19 @@
       "code": "Source Code",
       "browser": "Browser Compatibility",
       "copy": "Copy",
-      "copied": "Copied"
+      "copied": "Copied",
+      "addition": "Addition",
+      "subtraction": "Subtraction",
+      "multiplication": "Multiplication",
+      "division": "Division"
     },
     "navigate": {
       "esc-key": "To close",
       "down-up-key": "To navigate"
+    },
+    "preview-indicator": {
+      "width": "Width",
+      "height": "Height"
     }
   }
 }
