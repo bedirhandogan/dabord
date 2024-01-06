@@ -145,7 +145,7 @@ export default {
     border-radius: 3px;
     width: 100px;
     height: 3px;
-    background-color: #120031;
+    background-color: #131313;
 }
 
 .range-slider.vertical {
