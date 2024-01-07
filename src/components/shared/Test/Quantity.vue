@@ -74,6 +74,7 @@ export default {
 .quantity-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 15px;
     font-size: 14px;
 }
