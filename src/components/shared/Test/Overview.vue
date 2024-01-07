@@ -28,8 +28,8 @@ export default {
 
 <style scoped>
 .overview-container {
-    width: max-content;
     height: 100%;
+    min-width: 260px;
     border-right: 1px solid var(--color-dreamless-sleep);
     display: flex;
     align-items: center;
