@@ -1,4 +1,6 @@
 <script>
+import { getCoordinateOnAxis } from '@/utils/object'
+
 export default {
     props: {
         orientation: {
@@ -23,37 +25,25 @@ export default {
         }
     },
     methods: {
-        clientCoordinateMatcher(event, direction, device) {
-            switch (true) {
-                case device === 'desktop' && direction === 'y':
-                    return event.clientY
-                case device === 'desktop' && direction === 'x':
-                    return event.clientX
-                case device === 'mobile' && direction === 'y':
-                    return event.touches[0].clientY
-                case device === 'mobile' && direction === 'x':
-                    return event.touches[0].clientX
-            }
-        },
         handlePointerStart(event, device) {
             event.preventDefault()
             this.isDragging = true
 
             /* ----- Vertical ----- */
             if (this.orientation === 'vertical') {
-                this.startY = this.clientCoordinateMatcher(event, 'y', device) - this.circleY
+                this.startY = getCoordinateOnAxis(event, 'y') - this.circleY
                 return
             }
 
             /* ----- Horizontal ----- */
-            this.startX = this.clientCoordinateMatcher(event, 'x', device) - this.circleX
+            this.startX = getCoordinateOnAxis(event, 'x') - this.circleX
         },
         handlePointerMove(event, device) {
             if (this.isDragging) {
                 /* ----- Vertical ----- */
                 if (this.orientation === 'vertical') {
                     this.circleY = Math.min(
-                        Math.max(0, this.clientCoordinateMatcher(event, 'y', device) - this.startY),
+                        Math.max(0, getCoordinateOnAxis(event, 'y') - this.startY),
                         this.$refs['range-slider'].clientHeight
                     )
                     this.value(
@@ -64,7 +54,7 @@ export default {
 
                 /* ----- Horizontal ----- */
                 this.circleX = Math.min(
-                    Math.max(0, this.clientCoordinateMatcher(event, 'x', device) - this.startX),
+                    Math.max(0, getCoordinateOnAxis(event, 'x') - this.startX),
                     this.$refs['range-slider'].clientWidth
                 )
                 this.value(
