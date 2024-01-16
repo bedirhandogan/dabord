@@ -25,7 +25,7 @@ export default {
         }
     },
     methods: {
-        handlePointerStart(event, device) {
+        handlePointerStart(event) {
             event.preventDefault()
             this.isDragging = true
 
@@ -38,7 +38,7 @@ export default {
             /* ----- Horizontal ----- */
             this.startX = getCoordinateOnAxis(event, 'x') - this.circleX
         },
-        handlePointerMove(event, device) {
+        handlePointerMove(event) {
             if (this.isDragging) {
                 /* ----- Vertical ----- */
                 if (this.orientation === 'vertical') {
@@ -67,11 +67,10 @@ export default {
         }
     },
     mounted() {
-        document.addEventListener('mousemove', (event) => this.handlePointerMove(event, 'desktop'))
-        document.addEventListener('mouseup', (event) => this.handlePointerEnd(event, 'desktop'))
-
-        document.addEventListener('touchmove', (event) => this.handlePointerMove(event, 'mobile'))
-        document.addEventListener('touchend', (event) => this.handlePointerEnd(event, 'mobile'))
+        document.addEventListener('mousemove', this.handlePointerMove)
+        document.addEventListener('mouseup', this.handlePointerEnd)
+        document.addEventListener('touchmove', this.handlePointerMove)
+        document.addEventListener('touchend', this.handlePointerEnd)
 
         /* ----- Vertical ----- */
         if (this.orientation === 'vertical') {
@@ -84,15 +83,10 @@ export default {
         this.value(Math.round((this.circleX / this.$refs['range-slider'].clientWidth) * 100))
     },
     unmounted() {
-        document.removeEventListener('mousemove', (event) =>
-            this.handlePointerMove(event, 'desktop')
-        )
-        document.removeEventListener('mouseup', (event) => this.handlePointerEnd(event, 'desktop'))
-
-        document.removeEventListener('touchmove', (event) =>
-            this.handlePointerMove(event, 'mobile')
-        )
-        document.removeEventListener('touchend', (event) => this.handlePointerEnd(event, 'mobile'))
+        document.removeEventListener('mousemove', this.handlePointerMove)
+        document.removeEventListener('mouseup', this.handlePointerEnd)
+        document.removeEventListener('touchmove', this.handlePointerMove)
+        document.removeEventListener('touchend', this.handlePointerEnd)
     }
 }
 </script>
