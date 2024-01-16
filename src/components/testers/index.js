@@ -5,6 +5,7 @@ import atan from '@/components/testers/functions/atan.vue'
 import atan2 from '@/components/testers/functions/atan2.vue'
 import attr from '@/components/testers/functions/attr.vue'
 import calc from '@/components/testers/functions/calc.vue'
+import clamp from '@/components/testers/functions/clamp.vue'
 
 const testers = {
     functions: {
@@ -14,7 +15,8 @@ const testers = {
         'atan()': atan,
         'atan2()': atan2,
         'attr()': attr,
-        'calc()': calc
+        'calc()': calc,
+        'clamp()': clamp
     },
     properties: {},
     selectors: {}
