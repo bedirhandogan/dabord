@@ -56,7 +56,7 @@ export default {
     <div class="quantity-container">
         <div v-show="this.label.length !== 0">{{ this.label }}:</div>
         <div class="quantity">
-            <div class="increase" @click="this.increase">−</div>
+            <div class="increase" :class="0 === state && 'disabled'" @click="this.increase">−</div>
             <input
                 :value="this.state.toString()"
                 type="number"
@@ -65,7 +65,9 @@ export default {
                 @input="this.handleInputChange"
                 @keydown="this.handleKeyDown"
             />
-            <div class="decrease" @click="this.decrease">+</div>
+            <div class="decrease" :class="this.max === state && 'disabled'" @click="this.decrease">
+                +
+            </div>
         </div>
     </div>
 </template>
@@ -126,17 +128,29 @@ export default {
     flex-shrink: 0;
 }
 
-.increase:hover,
-.decrease:hover {
-    color: var(--color-titanium-white);
-    background-color: var(--color-raven);
-}
-
 .increase {
     border-right: 1px solid var(--color-chaos-black);
 }
 
 .decrease {
     border-left: 1px solid var(--color-chaos-black);
+}
+
+.increase:hover,
+.decrease:hover {
+    color: var(--color-titanium-white);
+    background-color: var(--color-raven);
+}
+
+.increase.disabled,
+.decrease.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.increase.disabled:hover,
+.decrease.disabled:hover {
+    color: var(--color-more-than-a-week);
+    background-color: transparent;
 }
 </style>
