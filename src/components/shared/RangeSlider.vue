@@ -1,5 +1,5 @@
 <script>
-import { getCoordinateOnAxis } from '@/utils/object'
+import { getCrossPlatformCoordinate } from '@/utils/event'
 
 export default {
     props: {
@@ -31,19 +31,19 @@ export default {
 
             /* ----- Vertical ----- */
             if (this.orientation === 'vertical') {
-                this.startY = getCoordinateOnAxis(event, 'y') - this.circleY
+                this.startY = getCrossPlatformCoordinate(event, 'y') - this.circleY
                 return
             }
 
             /* ----- Horizontal ----- */
-            this.startX = getCoordinateOnAxis(event, 'x') - this.circleX
+            this.startX = getCrossPlatformCoordinate(event, 'x') - this.circleX
         },
         handlePointerMove(event) {
             if (this.isDragging) {
                 /* ----- Vertical ----- */
                 if (this.orientation === 'vertical') {
                     this.circleY = Math.min(
-                        Math.max(0, getCoordinateOnAxis(event, 'y') - this.startY),
+                        Math.max(0, getCrossPlatformCoordinate(event, 'y') - this.startY),
                         this.$refs['range-slider'].clientHeight
                     )
                     this.value(
@@ -54,7 +54,7 @@ export default {
 
                 /* ----- Horizontal ----- */
                 this.circleX = Math.min(
-                    Math.max(0, getCoordinateOnAxis(event, 'x') - this.startX),
+                    Math.max(0, getCrossPlatformCoordinate(event, 'x') - this.startX),
                     this.$refs['range-slider'].clientWidth
                 )
                 this.value(

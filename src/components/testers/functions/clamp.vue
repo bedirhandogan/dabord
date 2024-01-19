@@ -4,9 +4,10 @@ import Tooltip from '@/components/shared/Tooltip.vue'
 import RangeSlider from '@/components/shared/RangeSlider.vue'
 import Modal from '@/components/modal/Modal.vue'
 import BrowserCompatibility from '@/components/modal/BrowserCompatibility.vue'
-import { copyCodeSnippetAndNotify, getReferenceURL, getSupportList } from '@/utils'
+import { getFeatureReferenceURL, getBrowserSupportList } from '@/utils/browser-compat'
+import copyCodeSnippetAndNotify from '@/utils/clipboard'
 import { useI18n } from 'vue-i18n'
-import { getCoordinateOnAxis } from '@/utils/object'
+import { getCrossPlatformCoordinate } from '@/utils/event'
 
 const codeSnippet = (x, y, symbol) => `.square {
     width: calc(${x} ${symbol} ${y});
@@ -72,16 +73,15 @@ export default defineComponent({
     },
     methods: {
         copyCodeSnippetAndNotify,
-        getReferenceURL,
-        getSupportList,
+        getFeatureReferenceURL,
+        getBrowserSupportList,
         handlePointerStart(event) {
             this.isMouseDown = true
-            console.log(getCoordinateOnAxis(event, 'x'))
-            this.xAxes.start = getCoordinateOnAxis(event, 'x') - this.xAxes.resizeBar
+            this.xAxes.start = getCrossPlatformCoordinate(event, 'x') - this.xAxes.resizeBar
         },
         handlePointerMove(event) {
             if (this.isMouseDown) {
-                const distance = getCoordinateOnAxis(event, 'x') - this.xAxes.start
+                const distance = getCrossPlatformCoordinate(event, 'x') - this.xAxes.start
                 this.xAxes.resizeBar = Math.max(Math.min(distance, 0), -50)
 
                 this.width = this.xAxes.resizeBar + 150
@@ -234,8 +234,8 @@ export default defineComponent({
     <Modal :state="this.showBrowserCompatibility">
         <BrowserCompatibility
             :state="(state) => (this.showBrowserCompatibility = state)"
-            :data="getSupportList('types', 'clamp')"
-            :reference="getReferenceURL('types', 'clamp')"
+            :data="getBrowserSupportList('types', 'clamp')"
+            :reference="getFeatureReferenceURL('types', 'clamp')"
         />
     </Modal>
 </template>

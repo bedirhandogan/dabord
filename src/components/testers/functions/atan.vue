@@ -4,7 +4,8 @@ import Tooltip from '@/components/shared/Tooltip.vue'
 import RangeSlider from '@/components/shared/RangeSlider.vue'
 import Modal from '@/components/modal/Modal.vue'
 import BrowserCompatibility from '@/components/modal/BrowserCompatibility.vue'
-import { copyCodeSnippetAndNotify, getReferenceURL, getSupportList } from '@/utils'
+import { getFeatureReferenceURL, getBrowserSupportList } from '@/utils/browser-compat'
+import copyCodeSnippetAndNotify from '@/utils/clipboard'
 import { useI18n } from 'vue-i18n'
 
 const codeSnippet = (value) => `.octagon {
@@ -42,8 +43,8 @@ export default defineComponent({
     },
     methods: {
         copyCodeSnippetAndNotify,
-        getReferenceURL,
-        getSupportList,
+        getFeatureReferenceURL,
+        getBrowserSupportList,
         changePropertyValue(state) {
             const integers = [
                 ...Array.from({ length: 50 }, (_, index) => -index - 1).reverse(),
@@ -157,8 +158,8 @@ export default defineComponent({
     <Modal :state="this.showBrowserCompatibility">
         <BrowserCompatibility
             :state="(state) => (this.showBrowserCompatibility = state)"
-            :data="getSupportList('types', 'atan')"
-            :reference="getReferenceURL('types', 'atan')"
+            :data="getBrowserSupportList('types', 'atan')"
+            :reference="getFeatureReferenceURL('types', 'atan')"
         />
     </Modal>
 </template>

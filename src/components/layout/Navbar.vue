@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 import Dropdown from '@/components/shared/Dropdown.vue'
 import { useI18n } from 'vue-i18n'
-import changeLocalLanguage from '@/utils/language'
+import updateLanguage from '@/utils/language'
 
 export default defineComponent({
     components: { Dropdown },
@@ -20,7 +20,7 @@ export default defineComponent({
         }
     },
     methods: {
-        changeLocalLanguage,
+        updateLanguage,
         hideSelectorBox(event) {
             if (!this.$el.contains(event.target)) this.showSelectorBox = false
         }
@@ -53,7 +53,7 @@ export default defineComponent({
             </div>
             <hr />
             <Dropdown
-                :mutation="(state) => changeLocalLanguage(state, this.$i18n)"
+                :mutation="(state) => updateLanguage(state, this.$i18n)"
                 :state="this.$i18n.locale"
                 :data="['tr', 'en']"
                 language-group="language"

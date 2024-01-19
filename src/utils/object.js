@@ -1,21 +1,17 @@
-export const flatObject = (object) => {
-    return Object.assign({}, ...Object.values(object))
+/**
+ * Flatten all properties inside an object.
+ * @param {Object} nestedObject - The object to be flattened.
+ * @returns {Object} - Flattened object.
+ */
+export const flatObject = (nestedObject) => {
+    return Object.assign({}, ...Object.values(nestedObject))
 }
 
+/**
+ * Return the number of properties within the object.
+ * @param {Object} object - Object for number of keys.
+ * @returns {number} - The number of keys in the object.
+ */
 export const getObjectLength = (object) => {
     return Object.keys(object).length
-}
-
-export const getCoordinateOnAxis = (event, axis) => {
-    if (event.touches === undefined) {
-        return {
-            x: event.clientX,
-            y: event.clientY
-        }[axis]
-    }
-
-    return {
-        x: event.touches[0].clientX,
-        y: event.touches[0].clientY
-    }[axis]
 }
