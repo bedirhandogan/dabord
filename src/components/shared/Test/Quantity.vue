@@ -144,13 +144,12 @@ export default {
 
 .increase.disabled,
 .decrease.disabled {
-    opacity: 0.5;
+    color: rgba(140, 140, 140, 0.5);
     cursor: default;
 }
 
 .increase.disabled:hover,
 .decrease.disabled:hover {
-    color: var(--color-more-than-a-week);
     background-color: transparent;
 }
 </style>
